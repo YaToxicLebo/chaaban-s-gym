@@ -147,6 +147,51 @@
     animation: neonGlow 6s linear infinite;
   }
 
+  /* Gym Equipment Section */
+  .equipment-list {
+    list-style: none;
+    padding-left: 1rem;
+    font-size: 1.1rem;
+  }
+  .equipment-list li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .equipment-list li::before {
+    content: "✓";
+    color: #39ff14;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  /* Personal Trainers Hours Section */
+  .trainers-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow:
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    animation: neonGlow 6s linear infinite;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .trainers-table th, .trainers-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #333;
+    text-align: center;
+  }
+  .trainers-table thead {
+    background: #111;
+  }
+  .trainers-table tbody tr:hover {
+    background: #333;
+  }
+
   /* Table for hours */
   table {
     width: 100%;
@@ -267,306 +312,54 @@
   }
   .stars {
     color: #ff0;
-    font-size: 1.2rem;
-    margin-bottom: 0.7rem;
-    text-shadow:
-      0 0 5px #ff0,
-      0 0 10px #ff0;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Section visibility */
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+
+  /* Neon glow animation cycling colors */
+  @keyframes neonGlow {
+    0%, 100% { text-shadow:
+      0 0 6px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+      color: #39ff14;
+    }
+    25% {
+      text-shadow:
+        0 0 6px #8000ff,
+        0 0 15px #ff00ff,
+        0 0 20px #39ff14,
+        0 0 25px #00f;
+      color: #8000ff;
+    }
+    50% {
+      text-shadow:
+        0 0 6px #ff00ff,
+        0 0 15px #39ff14,
+        0 0 20px #00f,
+        0 0 25px #8000ff;
+      color: #ff00ff;
+    }
+    75% {
+      text-shadow:
+        0 0 6px #39ff14,
+        0 0 15px #00f,
+        0 0 20px #8000ff,
+        0 0 25px #ff00ff;
+      color: #00f;
+    }
   }
 
   /* Responsive */
   @media (max-width: 768px) {
     .features {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-  }
-
-  /* Neon Glow Animation */
-  @keyframes neonGlow {
-    0%, 100% {
-      text-shadow:
-        0 0 8px #00f,
-        0 0 20px #8000ff,
-        0 0 30px #ff00ff,
-        0 0 40px #39ff14;
-      box-shadow:
-        0 0 15px #00f,
-        0 0 30px #8000ff,
-        0 0 45px #ff00ff,
-        0 0 60px #39ff14;
-      border-color: #39ff14;
-    }
-    25% {
-      text-shadow:
-        0 0 8px #8000ff,
-        0 0 20px #ff00ff,
-        0 0 30px #39ff14,
-        0 0 40px #00f;
-      box-shadow:
-        0 0 15px #8000ff,
-        0 0 30px #ff00ff,
-        0 0 45px #39ff14,
-        0 0 60px #00f;
-      border-color: #00f;
-    }
-    50% {
-      text-shadow:
-        0 0 8px #ff00ff,
-        0 0 20px #39ff14,
-        0 0 30px #00f,
-        0 0 40px #8000ff;
-      box-shadow:
-        0 0 15px #ff00ff,
-        0 0 30px #39ff14,
-        0 0 45px #00f,
-        0 0 60px #8000ff;
-      border-color: #ff00ff;
-    }
-    75% {
-      text-shadow:
-        0 0 8px #39ff14,
-        0 0 20px #00f,
-        0 0 30px #8000ff,
-        0 0 40px #ff00ff;
-      box-shadow:
-        0 0 15px #39ff14,
-        0 0 30px #00f,
-        0 0 45px #8000ff,
-        0 0 60px #ff00ff;
-      border-color: #8000ff;
-    }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <nav>
-    <ul>
-      <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-      <li><a href="#" class="nav-link" data-page="hours">Opening Hours</a></li>
-      <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
-      <li><a href="#" class="nav-link" data-page="reviews">Reviews</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main id="content">
-
-  <!-- Home Page -->
-  <section class="hero" data-page="home">
-    <h1>Welcome to FitLife</h1>
-    <p>Your journey to a healthier life starts here.</p>
-    <a href="#" class="btn" data-page="hours">Check Opening Hours</a>
-  </section>
-
-  <section class="features" data-page="home">
-    <div>
-      <h2>State-of-the-art Equipment</h2>
-      <p>Modern and safe equipment for all fitness levels.</p>
-    </div>
-    <div>
-      <h2>Professional Trainers</h2>
-      <p>Our trainers will guide you every step of the way.</p>
-    </div>
-    <div>
-      <h2>Group Classes</h2>
-      <p>Join exciting classes to keep you motivated and fit.</p>
-    </div>
-  </section>
-
-  <!-- Opening Hours Page -->
-  <section class="hours-section" data-page="hours" style="display:none;">
-    <h1>Opening Hours</h1>
-    <table>
-      <thead>
-        <tr><th>Day</th><th>Opening Hours</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Monday</td><td>6:00 AM - 9:00 PM</td></tr>
-        <tr><td>Tuesday</td><td>6:00 AM - 9:00 PM</td></tr>
-        <tr><td>Wednesday</td><td>6:00 AM - 9:00 PM</td></tr>
-        <tr><td>Thursday</td><td>6:00 AM - 9:00 PM</td></tr>
-        <tr><td>Friday</td><td>6:00 AM - 8:00 PM</td></tr>
-        <tr><td>Saturday</td><td>8:00 AM - 5:00 PM</td></tr>
-        <tr><td>Sunday</td><td>Closed</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Contact Page -->
-  <section class="contact-section" data-page="contact" style="display:none;">
-    <h1>Contact Us</h1>
-    <p>Have questions? Reach out to us!</p>
-
-    <ul class="contact-info">
-      <li><strong>Phone:</strong> +61 727872302</li>
-      <li><strong>Email:</strong> <a href="mailto:32738mb@gmail.com">32738mb@gmail.com</a></li>
-      <li><strong>Address:</strong> 1-23 Lilliput St Broadmeadows, Melbourne, VIC, Australia</li>
-    </ul>
-
-    <form action="#" method="POST" class="contact-form" onsubmit="return contactSubmit(event)">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
-
-      <label for="message">Message:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-
-      <button type="submit">Send Message</button>
-    </form>
-  </section>
-
-  <!-- Reviews Page -->
-  <section class="reviews-section" data-page="reviews" style="display:none;">
-    <h1>Reviews</h1>
-    <div id="reviews-container"></div>
-  </section>
-
-</main>
-
-<footer style="text-align:center; padding:1rem; background:#222; box-shadow: 0 0 20px #39ff14;">
-  <p>&copy; 2025 FitLife Gym. All rights reserved.</p>
-</footer>
-
-<script>
-  // SPA-like navigation
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[data-page]');
-
-  function showPage(page) {
-    sections.forEach(section => {
-      section.style.display = section.dataset.page === page ? 'block' : 'none';
-    });
-    navLinks.forEach(link => {
-      if(link.dataset.page === page){
-        link.classList.add('active');
-        link.style.animation = 'neonGlow 6s linear infinite';
-      } else {
-        link.classList.remove('active');
-        link.style.animation = 'none';
-      }
-    });
-  }
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      showPage(link.dataset.page);
-      window.scrollTo(0,0);
-    });
-  });
-
-  // Button on homepage also navigates to hours page
-  document.querySelectorAll('.btn[data-page]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      const targetPage = btn.dataset.page;
-      showPage(targetPage);
-      window.scrollTo(0,0);
-    });
-  });
-
-  // Contact form submit handler (dummy)
-  function contactSubmit(e) {
-    e.preventDefault();
-    alert("Thank you for contacting FitLife! We'll get back to you soon.");
-    e.target.reset();
-    return false;
-  }
-
-  // Reviews data
-  const reviewers = [
-    {name:"Hadassah Landry", text:"The equipment and trainers here are top-notch! I’ve never felt more motivated."},
-    {name:"Jaxx Huffman", text:"Amazing group classes and a very welcoming environment."},
-    {name:"Hayley Orozco", text:"Professional staff and excellent facilities. Highly recommend."},
-    {name:"Keanu Yoder", text:"FitLife helped me get in the best shape of my life. Five stars!"},
-    {name:"Emerie Franklin", text:"The neon vibe of the gym keeps me energized during workouts."},
-    {name:"Simon Friedman", text:"Clean, modern, and well-maintained. Trainers are very supportive."},
-    {name:"Aspyn Phillips", text:"Great community and varied class options."},
-    {name:"Andrew Soto", text:"Perfect place to start your fitness journey."},
-    {name:"Brynlee Sawyer", text:"Love the friendly staff and high-quality equipment."},
-    {name:"Jefferson Collier", text:"The gym’s hours fit perfectly with my schedule."},
-    {name:"Ivory Mata", text:"Always a positive and motivating atmosphere."},
-    {name:"Ray Moore", text:"A fantastic place to push yourself and meet great people."},
-    {name:"Emily Decker", text:"The group classes are fun and challenging."},
-    {name:"Taylor Bernal", text:"State-of-the-art machines and knowledgeable trainers."},
-    {name:"Emmeline Zhang", text:"Clean, safe, and very welcoming environment."},
-    {name:"Isaias Bridges", text:"The trainers helped me improve my technique significantly."},
-    {name:"Elora Richard", text:"Great location and flexible opening hours."},
-    {name:"Ahmed Casey", text:"I appreciate the variety of equipment available."},
-    {name:"Sylvia Wilson", text:"The neon lighting adds an awesome vibe."},
-    {name:"Daniel Maxwell", text:"Friendly staff and excellent fitness programs."},
-    {name:"Kyla Mason", text:"The perfect gym for beginners and pros alike."},
-    {name:"Brandon Juarez", text:"The neon colors make working out at night exciting."},
-    {name:"Juliet Harrell", text:"Convenient location and clean facilities."},
-    {name:"Nelson Peck", text:"I love the supportive community here."},
-    {name:"Crystal Felix", text:"Highly recommend to anyone serious about fitness."},
-    {name:"Rodney Fischer", text:"The neon glow adds a unique and motivating atmosphere."},
-    {name:"Maci Stokes", text:"Well-equipped gym with friendly trainers."},
-    {name:"Santana Manning", text:"Group classes are my favorite part."},
-    {name:"Jennifer Noble", text:"Excellent service and great value membership."},
-    {name:"Idris Allen", text:"The trainers are very knowledgeable and helpful."},
-    {name:"Riley Glass", text:"Clean and safe environment with great equipment."},
-    {name:"Allan Spencer", text:"The neon lights make workouts feel electric!"}, 
-    {name:"Alyssa Holland", text:"A welcoming place that motivates me daily."},
-    {name:"Brady Dunn", text:"Top-notch equipment and very professional staff."},
-    {name:"Olive Swanson", text:"The gym’s vibe is energetic and fun."},
-    {name:"Hugo Santiago", text:"Great classes and flexible timings."},
-    {name:"Nyla Cline", text:"A wonderful place to improve your fitness."},
-    {name:"Cullen Charles", text:"The neon glow is very inspiring during late workouts."},
-    {name:"Jenna Bernard", text:"Amazing trainers who really care."},
-    {name:"Jair Stanley", text:"Lots of equipment choices and clean facilities."},
-    {name:"Gracelyn Collins", text:"I love the community and neon style of the gym."},
-    {name:"Miles Miranda", text:"The best gym experience I’ve ever had."},
-    {name:"Amina Wood", text:"Motivating environment and helpful staff."},
-    {name:"Carson Patterson", text:"I always look forward to my workouts here."},
-    {name:"Kaylee Yoder", text:"Great atmosphere, especially with the neon lights."},
-    {name:"Johan Bartlett", text:"State-of-the-art equipment and friendly trainers."},
-    {name:"Aubrielle Ibarra", text:"Perfect gym for all fitness levels."},
-    {name:"Asa Conway", text:"The neon colors keep me pumped during workouts."},
-    {name:"Ryann Humphrey", text:"Excellent group classes and trainers."},
-    {name:"Krew Woods", text:"Clean, modern, and inviting gym environment."},
-    {name:"Reese Camacho", text:"The neon vibe adds energy and excitement."},
-    {name:"Tatum Olson", text:"Friendly staff and great workout programs."},
-    {name:"Isabel Schwartz", text:"The gym feels like a second home to me."},
-    {name:"Edwin Miller", text:"The neon glow creates an amazing atmosphere."},
-    {name:"Isabella Cameron", text:"Well-maintained equipment and helpful trainers."},
-    {name:"Rayan Nava", text:"The best place to stay motivated and fit."},
-    {name:"Scout Perry", text:"Love the neon ambiance and community spirit."}
-  ];
-
-  function renderReviews(){
-    const container = document.getElementById('reviews-container');
-    container.innerHTML = '';
-    reviewers.forEach(({name,text}) => {
-      const reviewDiv = document.createElement('div');
-      reviewDiv.className = 'review';
-
-      const nameEl = document.createElement('h3');
-      nameEl.textContent = name;
-
-      const starsEl = document.createElement('div');
-      starsEl.className = 'stars';
-      starsEl.innerHTML = '★★★★★';
-
-      const textEl = document.createElement('p');
-      textEl.textContent = text;
-
-      reviewDiv.appendChild(nameEl);
-      reviewDiv.appendChild(starsEl);
-      reviewDiv.appendChild(textEl);
-
-      container.appendChild(reviewDiv);
-    });
-  }
-
-  // Initialize reviews on load
-  renderReviews();
-</script>
-
-</body>
-</html>
+      flex-direction
