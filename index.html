@@ -5,481 +5,336 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FitLife Gym Store</title>
 <style>
-  /* Reset & basics */
+  /* Reset & base */
   * {
     margin: 0; padding: 0; box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   body {
-    background: #0d0d0d;
+    background: #111;
     color: #eee;
-    line-height: 1.6;
-    user-select: none;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   a {
-    color: #39ff14;
+    color: #eee;
     text-decoration: none;
-    transition: color 0.3s;
-    cursor: pointer;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14;
   }
   a:hover, a:focus {
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
-    outline: none;
+    text-decoration: underline;
   }
-
-  /* Header & Navigation */
   header {
-    background: #111;
+    background: #222;
     padding: 1rem 2rem;
+    box-shadow: 0 0 20px #39ff14;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 0 15px #00fff7;
+    z-index: 100;
   }
   nav ul {
-    display: flex;
     list-style: none;
-    justify-content: center;
+    display: flex;
     gap: 2rem;
+    justify-content: center;
   }
   nav ul li a {
-    color: #39ff14;
-    font-weight: 700;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 15px #39ff14;
-    user-select: none;
-    transition: background-color 0.3s, text-shadow 0.3s;
+    border-radius: 25px;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease;
   }
   nav ul li a.active,
-  nav ul li a:hover {
-    background-color: #00fff7;
-    color: #111;
-    text-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
-    box-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: #39ff14;
+    animation: neonGlow 6s linear infinite;
   }
 
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+  main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+
+  h1, h2 {
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    animation: neonGlow 6s linear infinite;
+  }
+  h1 {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
   }
 
   /* Hero Section */
   .hero {
     text-align: center;
-    padding: 4rem 1rem;
-    background: #111;
-    border-radius: 12px;
-    margin-bottom: 3rem;
+    padding: 3rem 1rem;
+    border-radius: 15px;
     box-shadow:
-      0 0 20px #ff00ff,
-      inset 0 0 30px #ff00ff;
-    color: #ff6aff;
-    text-shadow:
-      0 0 8px #ff00ff,
-      0 0 15px #ff00ff;
-  }
-  .hero h1 {
-    font-size: 3.2rem;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    text-shadow:
-      0 0 8px #ff00ff,
-      0 0 20px #ff00ff,
-      0 0 40px #ff00ff;
+      0 0 10px #00f,
+      0 0 20px #8000ff,
+      0 0 30px #ff00ff,
+      0 0 40px #39ff14;
+    background: #222;
+    margin-bottom: 5rem;
   }
   .hero p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 2rem;
-    color: #f0aaff;
-    text-shadow: 0 0 5px #f0aaff;
   }
+
+  /* Buttons */
   .btn {
-    background: linear-gradient(45deg, #00f7ff, #ff00d4, #39ff14);
-    background-size: 300% 300%;
-    animation: neonPulse 3s ease-in-out infinite;
-    color: #111;
-    padding: 0.9rem 2.5rem;
+    display: inline-block;
+    padding: 1rem 2rem;
     border-radius: 50px;
+    background: #111;
+    color: #eee;
     font-weight: 700;
+    font-size: 1.2rem;
     cursor: pointer;
     border: none;
-    font-size: 1.2rem;
     user-select: none;
     box-shadow:
-      0 0 10px #00f7ff,
-      0 0 20px #ff00d4,
-      0 0 30px #39ff14;
-    transition: box-shadow 0.3s ease-in-out;
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    animation: neonGlow 6s linear infinite;
+    transition: background 0.3s ease;
   }
-  .btn:hover,
-  .btn:focus {
-    box-shadow:
-      0 0 25px #00f7ff,
-      0 0 40px #ff00d4,
-      0 0 60px #39ff14;
+  .btn:hover, .btn:focus {
+    background: #222;
     outline: none;
+    animation: neonGlow 3s linear infinite reverse;
   }
 
-  @keyframes neonPulse {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Features Grid */
+  /* Features */
   .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
-    margin-bottom: 3rem;
+    justify-content: center;
   }
-  .features div {
-    background: #111;
-    border-radius: 12px;
-    padding: 2rem;
+  .features > div {
+    background: #222;
+    flex: 1 1 300px;
+    padding: 1.8rem;
+    border-radius: 15px;
     box-shadow:
-      0 0 15px #39ff14,
-      inset 0 0 20px #00f7ff;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .features div:hover {
-    transform: translateY(-12px);
-    box-shadow:
-      0 0 30px #00f7ff,
-      inset 0 0 40px #ff00d4;
-    color: #00fff7;
-    text-shadow:
-      0 0 12px #00fff7;
-  }
-  .features h2 {
-    margin-bottom: 1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    animation: neonGlow 6s linear infinite;
   }
 
-  /* Equipment Cards */
-  .equipment-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .equipment-card {
-    background: #111;
-    border-radius: 12px;
-    box-shadow:
-      0 0 20px #ff00d4,
-      inset 0 0 25px #00f7ff;
-    padding: 1rem;
-    text-align: center;
-    transition: box-shadow 0.3s, transform 0.3s;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .equipment-card:hover {
-    box-shadow:
-      0 0 40px #ff00d4,
-      inset 0 0 50px #00fff7;
-    transform: translateY(-10px);
-    color: #00fff7;
-    text-shadow:
-      0 0 15px #00fff7;
-  }
-  .equipment-card img {
-    max-width: 100%;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    box-shadow:
-      0 0 15px #ff00d4;
-    filter: drop-shadow(0 0 6px #ff00d4);
-  }
-  .equipment-card h3 {
-    margin-bottom: 0.5rem;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
-  }
-  .equipment-card p {
-    font-size: 0.95rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 3px #a6f3e6;
-  }
-
-  /* Opening Hours Table */
+  /* Table for hours */
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 3rem;
-    background: #111;
-    border-radius: 12px;
-    overflow: hidden;
     box-shadow:
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
       0 0 25px #39ff14;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 4px #39ff14;
+    animation: neonGlow 6s linear infinite;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
   }
   thead {
-    background: #ff00d4;
-    color: #111;
-    text-shadow:
-      0 0 10px #ff00d4;
+    background: #111;
   }
   th, td {
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     text-align: center;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #333;
   }
   tbody tr:hover {
-    background: #1a1a1a;
-    box-shadow:
-      inset 0 0 20px #00fff7;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
-  }
-  tfoot td {
-    font-weight: 700;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
+    background: #333;
   }
 
-  /* Opening hours caption */
-  caption {
-    color: #eee;
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-
-  /* Info Section in Hours */
-  #hours > section {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 10px #ff00d4;
-  }
-  #hours h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  /* Contact Section */
+  /* Contact */
   .contact-section {
-    background: #111;
-    padding: 2rem 2rem 3rem 2rem;
-    border-radius: 12px;
-    box-shadow:
-      0 0 40px #ff00d4,
-      inset 0 0 50px #00fff7;
     max-width: 600px;
-    margin: 2rem auto;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .contact-section h1 {
-    margin-bottom: 1rem;
-    color: #00fff7;
-    text-align: center;
-    text-shadow:
-      0 0 12px #00fff7,
-      0 0 25px #00fff7;
-  }
-  .contact-section p {
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 5px #a6f3e6;
+    margin: 0 auto;
+    background: #222;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow:
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    animation: neonGlow 6s linear infinite;
   }
   .contact-info {
     list-style: none;
     margin-bottom: 2rem;
-    padding-left: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
-  .contact-info li {
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
+  .contact-info li strong {
     color: #39ff14;
-    text-shadow:
-      0 0 6px #39ff14;
   }
-  .contact-info strong {
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
-  }
-
   .contact-form label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: #00fff7;
-    text-shadow:
-      0 0 8px #00fff7;
-    user-select: none;
+    margin: 1rem 0 0.3rem;
   }
   .contact-form input,
   .contact-form textarea {
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1.5rem;
-    border-radius: 12px;
-    border: 1.5px solid #39ff14;
-    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    border-radius: 25px;
+    border: none;
+    outline: none;
     background: #111;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    color: #eee;
+    font-size: 1rem;
+    box-shadow:
+      0 0 5px #39ff14 inset;
+  }
+  .contact-form textarea {
     resize: vertical;
   }
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: #ff00d4;
-    box-shadow:
-      0 0 12px #ff00d4;
-    color: #ff00d4;
-    text-shadow:
-      0 0 10px #ff00d4;
-    background: #222;
-  }
   .contact-form button {
-    display: block;
+    margin-top: 1.5rem;
     width: 100%;
     padding: 1rem;
-    background: #39ff14;
-    color: #111;
+    background: #111;
+    color: #eee;
     font-weight: 700;
     font-size: 1.2rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow:
-      0 0 15px #39ff14,
-      0 0 30px #39ff14;
-    transition: box-shadow 0.3s ease-in-out;
     user-select: none;
+    animation: neonGlow 6s linear infinite;
+    box-shadow:
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    transition: background 0.3s ease;
   }
   .contact-form button:hover,
   .contact-form button:focus {
-    box-shadow:
-      0 0 30px #ff00d4,
-      0 0 45px #ff00d4;
-    background: #ff00d4;
-    color: #111;
+    background: #222;
     outline: none;
+    animation: neonGlow 3s linear infinite reverse;
   }
 
   /* Reviews Section */
-  #reviews {
+  .reviews-section {
     max-width: 900px;
-    margin: 2rem auto 4rem auto;
-    padding: 1rem 2rem;
-    background: #111;
-    border-radius: 12px;
-    box-shadow:
-      0 0 40px #00fff7,
-      inset 0 0 50px #39ff14;
-    color: #39ff14;
-    user-select: none;
-  }
-  #reviews h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #00fff7;
-    text-shadow:
-      0 0 20px #00fff7,
-      0 0 40px #39ff14;
+    margin: 0 auto;
   }
   .review {
     background: #222;
-    border-radius: 12px;
+    margin-bottom: 1.5rem;
     padding: 1rem 1.5rem;
-    margin-bottom: 1.3rem;
+    border-radius: 12px;
     box-shadow:
-      0 0 15px #39ff14;
-    transition: box-shadow 0.3s ease;
+      0 0 8px #00f,
+      0 0 15px #8000ff,
+      0 0 20px #ff00ff,
+      0 0 25px #39ff14;
+    animation: neonGlow 6s linear infinite;
   }
-  .review:hover {
-    box-shadow:
-      0 0 30px #00fff7;
-  }
-  .review .name {
+  .review h3 {
+    margin-bottom: 0.3rem;
     font-weight: 700;
-    font-size: 1.1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
+    color: #39ff14;
   }
-  .review .stars {
-    color: #ffdc00;
+  .stars {
+    color: #ff0;
     font-size: 1.2rem;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.7rem;
     text-shadow:
-      0 0 6px #ffdc00,
-      0 0 12px #ffdc00;
-  }
-  .review .text {
-    font-size: 1rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 5px #a6f3e6;
+      0 0 5px #ff0,
+      0 0 10px #ff0;
   }
 
   /* Responsive */
-  @media (max-width: 600px) {
-    .features, .equipment-list {
-      grid-template-columns: 1fr;
-    }
-    nav ul {
+  @media (max-width: 768px) {
+    .features {
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
     }
-    .container {
-      margin: 1rem;
+  }
+
+  /* Neon Glow Animation */
+  @keyframes neonGlow {
+    0%, 100% {
+      text-shadow:
+        0 0 8px #00f,
+        0 0 20px #8000ff,
+        0 0 30px #ff00ff,
+        0 0 40px #39ff14;
+      box-shadow:
+        0 0 15px #00f,
+        0 0 30px #8000ff,
+        0 0 45px #ff00ff,
+        0 0 60px #39ff14;
+      border-color: #39ff14;
+    }
+    25% {
+      text-shadow:
+        0 0 8px #8000ff,
+        0 0 20px #ff00ff,
+        0 0 30px #39ff14,
+        0 0 40px #00f;
+      box-shadow:
+        0 0 15px #8000ff,
+        0 0 30px #ff00ff,
+        0 0 45px #39ff14,
+        0 0 60px #00f;
+      border-color: #00f;
+    }
+    50% {
+      text-shadow:
+        0 0 8px #ff00ff,
+        0 0 20px #39ff14,
+        0 0 30px #00f,
+        0 0 40px #8000ff;
+      box-shadow:
+        0 0 15px #ff00ff,
+        0 0 30px #39ff14,
+        0 0 45px #00f,
+        0 0 60px #8000ff;
+      border-color: #ff00ff;
+    }
+    75% {
+      text-shadow:
+        0 0 8px #39ff14,
+        0 0 20px #00f,
+        0 0 30px #8000ff,
+        0 0 40px #ff00ff;
+      box-shadow:
+        0 0 15px #39ff14,
+        0 0 30px #00f,
+        0 0 45px #8000ff,
+        0 0 60px #ff00ff;
+      border-color: #8000ff;
     }
   }
 </style>
@@ -489,213 +344,228 @@
 <header>
   <nav>
     <ul>
-      <li><a href="#" class="active" data-page="home">Home</a></li>
-      <li><a href="#" data-page="hours">Opening Hours</a></li>
-      <li><a href="#" data-page="contact">Contact Us</a></li>
-      <li><a href="#" data-page="reviews">Reviews</a></li>
+      <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#" class="nav-link" data-page="hours">Opening Hours</a></li>
+      <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+      <li><a href="#" class="nav-link" data-page="reviews">Reviews</a></li>
     </ul>
   </nav>
 </header>
 
-<main>
-  <section id="home" class="container page active">
-    <div class="hero">
-      <h1>Welcome to FitLife Gym Store</h1>
-      <p>Your one-stop shop for the latest gym equipment and gear.</p>
-      <button class="btn">Shop Now</button>
-    </div>
-    <div class="features">
-      <div>
-        <h2>Quality Equipment</h2>
-        <p>We only stock the best brands to help you reach your fitness goals.</p>
-      </div>
-      <div>
-        <h2>Expert Support</h2>
-        <p>Our team is here to help you find exactly what you need.</p>
-      </div>
-      <div>
-        <h2>Fast Shipping</h2>
-        <p>Get your gear quickly and start your workout without delay.</p>
-      </div>
-    </div>
+<main id="content">
 
-    <div class="equipment-list">
-      <div class="equipment-card">
-        <img src="https://images.unsplash.com/photo-1594737625785-7a22ca0bcadf?auto=format&fit=crop&w=400&q=80" alt="Treadmill" />
-        <h3>Treadmill</h3>
-        <p>Top-tier cardio machine to keep you moving.</p>
-      </div>
-      <div class="equipment-card">
-        <img src="https://images.unsplash.com/photo-1594737625781-1f828f6be2c7?auto=format&fit=crop&w=400&q=80" alt="Dumbbells" />
-        <h3>Dumbbells</h3>
-        <p>Perfect weights for strength training at any level.</p>
-      </div>
-      <div class="equipment-card">
-        <img src="https://images.unsplash.com/photo-1594737619963-1a06c59e8c92?auto=format&fit=crop&w=400&q=80" alt="Yoga Mat" />
-        <h3>Yoga Mat</h3>
-        <p>Comfortable and durable mat for all your yoga sessions.</p>
-      </div>
+  <!-- Home Page -->
+  <section class="hero" data-page="home">
+    <h1>Welcome to FitLife</h1>
+    <p>Your journey to a healthier life starts here.</p>
+    <a href="#" class="btn" data-page="hours">Check Opening Hours</a>
+  </section>
+
+  <section class="features" data-page="home">
+    <div>
+      <h2>State-of-the-art Equipment</h2>
+      <p>Modern and safe equipment for all fitness levels.</p>
+    </div>
+    <div>
+      <h2>Professional Trainers</h2>
+      <p>Our trainers will guide you every step of the way.</p>
+    </div>
+    <div>
+      <h2>Group Classes</h2>
+      <p>Join exciting classes to keep you motivated and fit.</p>
     </div>
   </section>
 
-  <section id="hours" class="container page" aria-label="Opening Hours">
-    <h2>Opening Hours</h2>
+  <!-- Opening Hours Page -->
+  <section class="hours-section" data-page="hours" style="display:none;">
+    <h1>Opening Hours</h1>
     <table>
-      <caption>FitLife Gym Store Weekly Opening Hours</caption>
       <thead>
-        <tr><th>Day</th><th>Opening Time</th><th>Closing Time</th></tr>
+        <tr><th>Day</th><th>Opening Hours</th></tr>
       </thead>
       <tbody>
-        <tr><td>Monday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Tuesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Wednesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Thursday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Friday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Saturday</td><td>8:00 AM</td><td>8:00 PM</td></tr>
-        <tr><td>Sunday</td><td>8:00 AM</td><td>6:00 PM</td></tr>
+        <tr><td>Monday</td><td>6:00 AM - 9:00 PM</td></tr>
+        <tr><td>Tuesday</td><td>6:00 AM - 9:00 PM</td></tr>
+        <tr><td>Wednesday</td><td>6:00 AM - 9:00 PM</td></tr>
+        <tr><td>Thursday</td><td>6:00 AM - 9:00 PM</td></tr>
+        <tr><td>Friday</td><td>6:00 AM - 8:00 PM</td></tr>
+        <tr><td>Saturday</td><td>8:00 AM - 5:00 PM</td></tr>
+        <tr><td>Sunday</td><td>Closed</td></tr>
       </tbody>
-      <tfoot>
-        <tr><td colspan="3">Open every day for your convenience!</td></tr>
-      </tfoot>
     </table>
-    <section>
-      <h3>Need assistance during opening hours?</h3>
-      <p>Contact our support team anytime—we're here to help you find the perfect equipment.</p>
-    </section>
   </section>
 
-  <section id="contact" class="container page" aria-label="Contact Us">
-    <div class="contact-section">
-      <h1>Contact Us</h1>
-      <p>Have questions? Reach out and we'll get back to you as soon as possible.</p>
-      <ul class="contact-info" aria-live="polite">
-        <li><strong>Phone:</strong> (123) 456-7890</li>
-        <li><strong>Email:</strong> support@fitlifegymstore.com</li>
-        <li><strong>Address:</strong> 123 Fitness Ave, Wellness City, USA</li>
-      </ul>
-      <form class="contact-form" aria-label="Contact Form" onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you shortly.'); this.reset();">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required aria-required="true" />
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required aria-required="true" />
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
+  <!-- Contact Page -->
+  <section class="contact-section" data-page="contact" style="display:none;">
+    <h1>Contact Us</h1>
+    <p>Have questions? Reach out to us!</p>
+
+    <ul class="contact-info">
+      <li><strong>Phone:</strong> +61 727872302</li>
+      <li><strong>Email:</strong> <a href="mailto:32738mb@gmail.com">32738mb@gmail.com</a></li>
+      <li><strong>Address:</strong> 1-23 Lilliput St Broadmeadows, Melbourne, VIC, Australia</li>
+    </ul>
+
+    <form action="#" method="POST" class="contact-form" onsubmit="return contactSubmit(event)">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
-  <section id="reviews" class="container page" aria-label="Customer Reviews">
-    <h2>Customer Reviews</h2>
-    <!-- Reviews injected by JS -->
+  <!-- Reviews Page -->
+  <section class="reviews-section" data-page="reviews" style="display:none;">
+    <h1>Reviews</h1>
+    <div id="reviews-container"></div>
   </section>
+
 </main>
 
+<footer style="text-align:center; padding:1rem; background:#222; box-shadow: 0 0 20px #39ff14;">
+  <p>&copy; 2025 FitLife Gym. All rights reserved.</p>
+</footer>
+
 <script>
-  // Navigation toggle for pages
-  const navLinks = document.querySelectorAll('nav ul li a');
-  const pages = document.querySelectorAll('.page');
+  // SPA-like navigation
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[data-page]');
+
+  function showPage(page) {
+    sections.forEach(section => {
+      section.style.display = section.dataset.page === page ? 'block' : 'none';
+    });
+    navLinks.forEach(link => {
+      if(link.dataset.page === page){
+        link.classList.add('active');
+        link.style.animation = 'neonGlow 6s linear infinite';
+      } else {
+        link.classList.remove('active');
+        link.style.animation = 'none';
+      }
+    });
+  }
 
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      const pageName = link.getAttribute('data-page');
-      // Remove active class from all links and add to clicked
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      // Show the corresponding page and hide others
-      pages.forEach(page => {
-        if (page.id === pageName) {
-          page.classList.add('active');
-          page.style.display = 'block';
-        } else {
-          page.classList.remove('active');
-          page.style.display = 'none';
-        }
-      });
+      showPage(link.dataset.page);
+      window.scrollTo(0,0);
     });
   });
 
-  // Initially show only home page
-  pages.forEach(page => {
-    if (!page.classList.contains('active')) {
-      page.style.display = 'none';
-    }
+  // Button on homepage also navigates to hours page
+  document.querySelectorAll('.btn[data-page]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const targetPage = btn.dataset.page;
+      showPage(targetPage);
+      window.scrollTo(0,0);
+    });
   });
+
+  // Contact form submit handler (dummy)
+  function contactSubmit(e) {
+    e.preventDefault();
+    alert("Thank you for contacting FitLife! We'll get back to you soon.");
+    e.target.reset();
+    return false;
+  }
 
   // Reviews data
-  const reviewsData = [
-    {name: "Hadassah Landry", text: "Amazing service and top-quality gear. Highly recommend!"},
-    {name: "Jaxx Huffman", text: "The best gym store I’ve ever been to. Five stars!"},
-    {name: "Hayley Orozco", text: "Love the variety and fast shipping."},
-    {name: "Keanu Yoder", text: "Great customer support and quality products."},
-    {name: "Emerie Franklin", text: "I found everything I needed and more!"},
-    {name: "Simon Friedman", text: "Solid equipment and awesome staff."},
-    {name: "Aspyn Phillips", text: "Fantastic experience shopping here."},
-    {name: "Andrew Soto", text: "The equipment is durable and affordable."},
-    {name: "Brynlee Sawyer", text: "I’m very happy with my purchase."},
-    {name: "Jefferson Collier", text: "Highly recommend for gym enthusiasts."},
-    {name: "Ivory Mata", text: "Customer service went above and beyond."},
-    {name: "Ray Moore", text: "Great quality and quick delivery."},
-    {name: "Emily Decker", text: "Love the neon vibe of the store and products."},
-    {name: "Taylor Bernal", text: "Everything was perfect, no complaints!"},
-    {name: "Emmeline Zhang", text: "Fast, reliable, and excellent gear."},
-    {name: "Isaias Bridges", text: "Perfect for home gym setups."},
-    {name: "Elora Richard", text: "Affordable prices and good quality."},
-    {name: "Ahmed Casey", text: "Very satisfied with my treadmill purchase."},
-    {name: "Sylvia Wilson", text: "Easy to navigate site and great deals."},
-    {name: "Daniel Maxwell", text: "Best place for fitness gear online."},
-    {name: "Kyla Mason", text: "Highly recommend for beginners and pros."},
-    {name: "Brandon Juarez", text: "Fast shipping and friendly staff."},
-    {name: "Juliet Harrell", text: "Quality products that last."},
-    {name: "Nelson Peck", text: "Excellent customer service experience."},
-    {name: "Crystal Felix", text: "Love the variety of equipment."},
-    {name: "Rodney Fischer", text: "Great prices and quality."},
-    {name: "Maci Stokes", text: "I’m a repeat customer for a reason."},
-    {name: "Santana Manning", text: "Five stars for sure!"},
-    {name: "Jennifer Noble", text: "The best selection and fast delivery."},
-    {name: "Idris Allen", text: "Very professional and helpful."},
-    {name: "Riley Glass", text: "I found the perfect dumbbells here."},
-    {name: "Allan Spencer", text: "Impressed with their product range."},
-    {name: "Alyssa Holland", text: "Friendly staff and fast support."},
-    {name: "Brady Dunn", text: "My go-to gym store now."},
-    {name: "Olive Swanson", text: "Great quality yoga mats."},
-    {name: "Hugo Santiago", text: "Shipping was quick and products are top-notch."},
-    {name: "Nyla Cline", text: "Highly recommend for fitness gear."},
-    {name: "Cullen Charles", text: "Perfect for all workout needs."},
-    {name: "Jenna Bernard", text: "Loved the shopping experience."},
-    {name: "Jair Stanley", text: "Affordable and great quality."},
-    {name: "Gracelyn Collins", text: "Customer service is outstanding."},
-    {name: "Miles Miranda", text: "Excellent products at great prices."},
-    {name: "Amina Wood", text: "My favorite gym equipment store."},
-    {name: "Carson Patterson", text: "Will definitely buy again."},
-    {name: "Kaylee Yoder", text: "Top-notch gear and fast delivery."},
-    {name: "Johan Bartlett", text: "Friendly and helpful team."},
-    {name: "Aubrielle Ibarra", text: "I recommend this store to everyone."},
-    {name: "Asa Conway", text: "Best place to buy fitness equipment."},
-    {name: "Ryann Humphrey", text: "High-quality products and great support."},
-    {name: "Krew Woods", text: "Very happy with my order."},
-    {name: "Reese Camacho", text: "Fantastic selection and service."},
-    {name: "Tatum Olson", text: "Easy to order and quick shipping."},
-    {name: "Isabel Schwartz", text: "Great prices and quality."},
-    {name: "Edwin Miller", text: "Reliable and trustworthy store."},
-    {name: "Isabella Cameron", text: "Highly recommend their yoga mats."},
-    {name: "Rayan Nava", text: "Perfect service and products."},
-    {name: "Scout Perry", text: "Will definitely return for more!"}
+  const reviewers = [
+    {name:"Hadassah Landry", text:"The equipment and trainers here are top-notch! I’ve never felt more motivated."},
+    {name:"Jaxx Huffman", text:"Amazing group classes and a very welcoming environment."},
+    {name:"Hayley Orozco", text:"Professional staff and excellent facilities. Highly recommend."},
+    {name:"Keanu Yoder", text:"FitLife helped me get in the best shape of my life. Five stars!"},
+    {name:"Emerie Franklin", text:"The neon vibe of the gym keeps me energized during workouts."},
+    {name:"Simon Friedman", text:"Clean, modern, and well-maintained. Trainers are very supportive."},
+    {name:"Aspyn Phillips", text:"Great community and varied class options."},
+    {name:"Andrew Soto", text:"Perfect place to start your fitness journey."},
+    {name:"Brynlee Sawyer", text:"Love the friendly staff and high-quality equipment."},
+    {name:"Jefferson Collier", text:"The gym’s hours fit perfectly with my schedule."},
+    {name:"Ivory Mata", text:"Always a positive and motivating atmosphere."},
+    {name:"Ray Moore", text:"A fantastic place to push yourself and meet great people."},
+    {name:"Emily Decker", text:"The group classes are fun and challenging."},
+    {name:"Taylor Bernal", text:"State-of-the-art machines and knowledgeable trainers."},
+    {name:"Emmeline Zhang", text:"Clean, safe, and very welcoming environment."},
+    {name:"Isaias Bridges", text:"The trainers helped me improve my technique significantly."},
+    {name:"Elora Richard", text:"Great location and flexible opening hours."},
+    {name:"Ahmed Casey", text:"I appreciate the variety of equipment available."},
+    {name:"Sylvia Wilson", text:"The neon lighting adds an awesome vibe."},
+    {name:"Daniel Maxwell", text:"Friendly staff and excellent fitness programs."},
+    {name:"Kyla Mason", text:"The perfect gym for beginners and pros alike."},
+    {name:"Brandon Juarez", text:"The neon colors make working out at night exciting."},
+    {name:"Juliet Harrell", text:"Convenient location and clean facilities."},
+    {name:"Nelson Peck", text:"I love the supportive community here."},
+    {name:"Crystal Felix", text:"Highly recommend to anyone serious about fitness."},
+    {name:"Rodney Fischer", text:"The neon glow adds a unique and motivating atmosphere."},
+    {name:"Maci Stokes", text:"Well-equipped gym with friendly trainers."},
+    {name:"Santana Manning", text:"Group classes are my favorite part."},
+    {name:"Jennifer Noble", text:"Excellent service and great value membership."},
+    {name:"Idris Allen", text:"The trainers are very knowledgeable and helpful."},
+    {name:"Riley Glass", text:"Clean and safe environment with great equipment."},
+    {name:"Allan Spencer", text:"The neon lights make workouts feel electric!"}, 
+    {name:"Alyssa Holland", text:"A welcoming place that motivates me daily."},
+    {name:"Brady Dunn", text:"Top-notch equipment and very professional staff."},
+    {name:"Olive Swanson", text:"The gym’s vibe is energetic and fun."},
+    {name:"Hugo Santiago", text:"Great classes and flexible timings."},
+    {name:"Nyla Cline", text:"A wonderful place to improve your fitness."},
+    {name:"Cullen Charles", text:"The neon glow is very inspiring during late workouts."},
+    {name:"Jenna Bernard", text:"Amazing trainers who really care."},
+    {name:"Jair Stanley", text:"Lots of equipment choices and clean facilities."},
+    {name:"Gracelyn Collins", text:"I love the community and neon style of the gym."},
+    {name:"Miles Miranda", text:"The best gym experience I’ve ever had."},
+    {name:"Amina Wood", text:"Motivating environment and helpful staff."},
+    {name:"Carson Patterson", text:"I always look forward to my workouts here."},
+    {name:"Kaylee Yoder", text:"Great atmosphere, especially with the neon lights."},
+    {name:"Johan Bartlett", text:"State-of-the-art equipment and friendly trainers."},
+    {name:"Aubrielle Ibarra", text:"Perfect gym for all fitness levels."},
+    {name:"Asa Conway", text:"The neon colors keep me pumped during workouts."},
+    {name:"Ryann Humphrey", text:"Excellent group classes and trainers."},
+    {name:"Krew Woods", text:"Clean, modern, and inviting gym environment."},
+    {name:"Reese Camacho", text:"The neon vibe adds energy and excitement."},
+    {name:"Tatum Olson", text:"Friendly staff and great workout programs."},
+    {name:"Isabel Schwartz", text:"The gym feels like a second home to me."},
+    {name:"Edwin Miller", text:"The neon glow creates an amazing atmosphere."},
+    {name:"Isabella Cameron", text:"Well-maintained equipment and helpful trainers."},
+    {name:"Rayan Nava", text:"The best place to stay motivated and fit."},
+    {name:"Scout Perry", text:"Love the neon ambiance and community spirit."}
   ];
 
-  // Create review elements
-  const reviewsContainer = document.getElementById('reviews');
-  reviewsData.forEach(({name, text}) => {
-    const reviewEl = document.createElement('div');
-    reviewEl.className = 'review';
-    reviewEl.innerHTML = `
-      <div class="name">${name}</div>
-      <div class="stars" aria-label="5 star rating">★★★★★</div>
-      <div class="text">${text}</div>
-    `;
-    reviewsContainer.appendChild(reviewEl);
-  });
+  function renderReviews(){
+    const container = document.getElementById('reviews-container');
+    container.innerHTML = '';
+    reviewers.forEach(({name,text}) => {
+      const reviewDiv = document.createElement('div');
+      reviewDiv.className = 'review';
+
+      const nameEl = document.createElement('h3');
+      nameEl.textContent = name;
+
+      const starsEl = document.createElement('div');
+      starsEl.className = 'stars';
+      starsEl.innerHTML = '★★★★★';
+
+      const textEl = document.createElement('p');
+      textEl.textContent = text;
+
+      reviewDiv.appendChild(nameEl);
+      reviewDiv.appendChild(starsEl);
+      reviewDiv.appendChild(textEl);
+
+      container.appendChild(reviewDiv);
+    });
+  }
+
+  // Initialize reviews on load
+  renderReviews();
 </script>
 
 </body>
