@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FitLife Gym Store</title>
-<!-- Google Fonts for better font styling -->
+<!-- Google Font for neon/futuristic style -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 <style>
   /* Reset & basics */
@@ -607,8 +607,10 @@
     link.addEventListener('click', e => {
       e.preventDefault();
       const pageName = link.getAttribute('data-page');
+      // Remove active class from all links and add to clicked
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
+      // Show the selected page, hide others
       pages.forEach(page => {
         if (page.id === pageName) {
           page.style.display = 'block';
@@ -619,14 +621,68 @@
     });
   });
 
-  // Initialize reviews
+  // Reviews data
   const reviewsData = [
     {name: "Hadassah Landry", text: "Amazing service and top-quality gear. Highly recommend!"},
     {name: "Jaxx Huffman", text: "The best gym store I’ve ever been to. Five stars!"},
     {name: "Hayley Orozco", text: "Love the variety and fast shipping."},
-    // ... (rest omitted for brevity)
+    {name: "Keanu Yoder", text: "Great customer support and quality products."},
+    {name: "Emerie Franklin", text: "I found everything I needed and more!"},
+    {name: "Simon Friedman", text: "Solid equipment and awesome staff."},
+    {name: "Aspyn Phillips", text: "Fantastic experience shopping here."},
+    {name: "Andrew Soto", text: "The equipment is durable and affordable."},
+    {name: "Brynlee Sawyer", text: "I’m very happy with my purchase."},
+    {name: "Jefferson Collier", text: "Highly recommend for gym enthusiasts."},
+    {name: "Ivory Mata", text: "Customer service went above and beyond."},
+    {name: "Ray Moore", text: "Great quality and quick delivery."},
+    {name: "Emily Decker", text: "Love the neon vibe of the store and products."},
+    {name: "Taylor Bernal", text: "Everything was perfect, no complaints!"},
+    {name: "Emmeline Zhang", text: "Fast, reliable, and excellent gear."},
+    {name: "Isaias Bridges", text: "Perfect for home gym setups."},
+    {name: "Elora Richard", text: "Affordable prices and good quality."},
+    {name: "Ahmed Casey", text: "Very satisfied with my treadmill purchase."},
+    {name: "Sylvia Wilson", text: "Easy to navigate site and great deals."},
+    {name: "Daniel Maxwell", text: "Best place for fitness gear online."},
+    {name: "Kyla Mason", text: "Highly recommend for beginners and pros."},
+    {name: "Brandon Juarez", text: "Fast shipping and friendly staff."},
+    {name: "Juliet Harrell", text: "Quality products that last."},
+    {name: "Nelson Peck", text: "Excellent customer service experience."},
+    {name: "Crystal Felix", text: "Love the variety of equipment."},
+    {name: "Rodney Fischer", text: "Great prices and quality."},
+    {name: "Maci Stokes", text: "I’m a repeat customer for a reason."},
+    {name: "Santana Manning", text: "Five stars for sure!"},
+    {name: "Jennifer Noble", text: "The best selection and fast delivery."},
+    {name: "Idris Allen", text: "Very professional and helpful."},
+    {name: "Riley Glass", text: "I found the perfect dumbbells here."},
+    {name: "Allan Spencer", text: "Impressed with their product range."},
+    {name: "Alyssa Holland", text: "Friendly staff and fast support."},
+    {name: "Brady Dunn", text: "My go-to gym store now."},
+    {name: "Olive Swanson", text: "Great quality yoga mats."},
+    {name: "Hugo Santiago", text: "Shipping was quick and products are top-notch."},
+    {name: "Nyla Cline", text: "Highly recommend for fitness gear."},
+    {name: "Cullen Charles", text: "Perfect for all workout needs."},
+    {name: "Jenna Bernard", text: "Loved the shopping experience."},
+    {name: "Jair Stanley", text: "Affordable and great quality."},
+    {name: "Gracelyn Collins", text: "Customer service is outstanding."},
+    {name: "Miles Miranda", text: "Excellent products at great prices."},
+    {name: "Amina Wood", text: "My favorite gym equipment store."},
+    {name: "Carson Patterson", text: "Will definitely buy again."},
+    {name: "Kaylee Yoder", text: "Top-notch gear and fast delivery."},
+    {name: "Johan Bartlett", text: "Friendly and helpful team."},
+    {name: "Aubrielle Ibarra", text: "I recommend this store to everyone."},
+    {name: "Asa Conway", text: "Best place to buy fitness equipment."},
+    {name: "Ryann Humphrey", text: "High-quality products and great support."},
+    {name: "Krew Woods", text: "Very happy with my order."},
+    {name: "Reese Camacho", text: "Fantastic selection and service."},
+    {name: "Tatum Olson", text: "Easy to order and quick shipping."},
+    {name: "Isabel Schwartz", text: "Great prices and quality."},
+    {name: "Edwin Miller", text: "Reliable and trustworthy store."},
+    {name: "Isabella Cameron", text: "Highly recommend their yoga mats."},
+    {name: "Rayan Nava", text: "Perfect service and products."},
     {name: "Scout Perry", text: "Will definitely return for more!"}
   ];
+
+  // Create review elements
   const reviewsContainer = document.getElementById('reviews');
   reviewsData.forEach(({name, text}) => {
     const reviewEl = document.createElement('div');
