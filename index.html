@@ -5,698 +5,198 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FitLife Gym Store</title>
 <style>
-  /* Reset & basics */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  body {
-    background: #0d0d0d;
-    color: #eee;
-    line-height: 1.6;
-    user-select: none;
-  }
-  a {
-    color: #39ff14;
-    text-decoration: none;
-    transition: color 0.3s;
-    cursor: pointer;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 20px #39ff14;
-  }
-  a:hover, a:focus {
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
-    outline: none;
-  }
+/* Reset & basics */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: #0d0d0d; color: #eee; line-height: 1.6; user-select: none; overflow-x: hidden; }
+a { color: #39ff14; text-decoration: none; transition: color 0.3s; cursor: pointer; text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 20px #39ff14; }
+a:hover, a:focus { color: #00fff7; text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7, 0 0 30px #00fff7; outline: none; }
 
-  /* Header & Navigation */
-  header {
-    background: #111;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 0 15px #00fff7;
-  }
-  nav ul {
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    gap: 2rem;
-  }
-  nav ul li a {
-    color: #39ff14;
-    font-weight: 700;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-shadow:
-      0 0 5px #39ff14,
-      0 0 10px #39ff14,
-      0 0 15px #39ff14;
-    user-select: none;
-    transition: background-color 0.3s, text-shadow 0.3s;
-  }
-  nav ul li a.active,
-  nav ul li a:hover {
-    background-color: #00fff7;
-    color: #111;
-    text-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
-    box-shadow:
-      0 0 10px #00fff7,
-      0 0 20px #00fff7,
-      0 0 30px #00fff7;
-  }
+/* Splash Screen */
+#splash { position: fixed; top:0; left:0; width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; color:#ff6aff; font-size:3rem; text-shadow:0 0 20px #ff00ff,0 0 40px #ff00ff; z-index:2000; transition: opacity 1s ease; }
 
-  /* Container */
-  .container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
+/* Header & Navigation */
+header { background: #111; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 0 15px #00fff7; }
+nav ul { display: flex; list-style: none; justify-content: center; gap: 2rem; }
+nav ul li a { color: #39ff14; font-weight: 700; padding: 0.5rem 1rem; border-radius: 6px; text-shadow: 0 0 5px #39ff14, 0 0 10px #39ff14, 0 0 15px #39ff14; transition: background-color 0.3s, text-shadow 0.3s; }
+nav ul li a.active, nav ul li a:hover { background-color: #00fff7; color: #111; text-shadow: 0 0 10px #00fff7,0 0 20px #00fff7,0 0 30px #00fff7; box-shadow:0 0 10px #00fff7,0 0 20px #00fff7,0 0 30px #00fff7; }
 
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    background: #111;
-    border-radius: 12px;
-    margin-bottom: 3rem;
-    box-shadow:
-      0 0 20px #ff00ff,
-      inset 0 0 30px #ff00ff;
-    color: #ff6aff;
-    text-shadow:
-      0 0 8px #ff00ff,
-      0 0 15px #ff00ff;
-  }
-  .hero h1 {
-    font-size: 3.2rem;
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    text-shadow:
-      0 0 8px #ff00ff,
-      0 0 20px #ff00ff,
-      0 0 40px #ff00ff;
-  }
-  .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    color: #f0aaff;
-    text-shadow: 0 0 5px #f0aaff;
-  }
-  .btn {
-    background: linear-gradient(45deg, #00f7ff, #ff00d4, #39ff14);
-    background-size: 300% 300%;
-    animation: neonPulse 3s ease-in-out infinite;
-    color: #111;
-    padding: 0.9rem 2.5rem;
-    border-radius: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    font-size: 1.2rem;
-    user-select: none;
-    box-shadow:
-      0 0 10px #00f7ff,
-      0 0 20px #ff00d4,
-      0 0 30px #39ff14;
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  .btn:hover,
-  .btn:focus {
-    box-shadow:
-      0 0 25px #00f7ff,
-      0 0 40px #ff00d4,
-      0 0 60px #39ff14;
-    outline: none;
-  }
+/* Container */
+.container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
 
-  @keyframes neonPulse {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-  }
+/* Hero Section */
+.hero { text-align: center; padding: 4rem 1rem; background: #111; border-radius: 12px; margin-bottom: 3rem; box-shadow: 0 0 20px #ff00ff, inset 0 0 30px #ff00ff; color: #ff6aff; text-shadow:0 0 8px #ff00ff,0 0 15px #ff00ff;}
+.hero h1 { font-size: 3.2rem; margin-bottom: 1rem; letter-spacing: 2px; text-shadow:0 0 8px #ff00ff,0 0 20px #ff00ff,0 0 40px #ff00ff; }
+.hero p { font-size: 1.3rem; margin-bottom: 2rem; color: #f0aaff; text-shadow:0 0 5px #f0aaff; }
+.btn { background: linear-gradient(45deg, #00f7ff, #ff00d4, #39ff14); background-size: 300% 300%; animation: neonPulse 3s ease-in-out infinite; color: #111; padding: 0.9rem 2.5rem; border-radius: 50px; font-weight: 700; cursor: pointer; border: none; font-size: 1.2rem; box-shadow: 0 0 10px #00f7ff, 0 0 20px #ff00d4, 0 0 30px #39ff14; transition: box-shadow 0.3s; }
+.btn:hover, .btn:focus { box-shadow: 0 0 25px #00f7ff, 0 0 40px #ff00d4, 0 0 60px #39ff14; outline: none; }
 
-  /* Features Grid */
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .features div {
-    background: #111;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow:
-      0 0 15px #39ff14,
-      inset 0 0 20px #00f7ff;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .features div:hover {
-    transform: translateY(-12px);
-    box-shadow:
-      0 0 30px #00f7ff,
-      inset 0 0 40px #ff00d4;
-    color: #00fff7;
-    text-shadow:
-      0 0 12px #00fff7;
-  }
-  .features h2 {
-    margin-bottom: 1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
-  }
+@keyframes neonPulse { 0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
 
-  /* Equipment Cards */
-  .equipment-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  .equipment-card {
-    background: #111;
-    border-radius: 12px;
-    box-shadow:
-      0 0 20px #ff00d4,
-      inset 0 0 25px #00f7ff;
-    padding: 1rem;
-    text-align: center;
-    transition: box-shadow 0.3s, transform 0.3s;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .equipment-card:hover {
-    box-shadow:
-      0 0 40px #ff00d4,
-      inset 0 0 50px #00fff7;
-    transform: translateY(-10px);
-    color: #00fff7;
-    text-shadow:
-      0 0 15px #00fff7;
-  }
-  .equipment-card img {
-    max-width: 100%;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    box-shadow:
-      0 0 15px #ff00d4;
-    filter: drop-shadow(0 0 6px #ff00d4);
-  }
-  .equipment-card h3 {
-    margin-bottom: 0.5rem;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
-  }
-  .equipment-card p {
-    font-size: 0.95rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 3px #a6f3e6;
-  }
+/* Features Grid */
+.features { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 2rem; margin-bottom: 3rem; }
+.features div { background: #111; border-radius: 12px; padding: 2rem; box-shadow: 0 0 15px #39ff14, inset 0 0 20px #00f7ff; text-align: center; transition: transform 0.3s, box-shadow 0.3s; color: #39ff14; text-shadow: 0 0 5px #39ff14; }
+.features div:hover { transform: translateY(-12px); box-shadow:0 0 30px #00f7ff,inset 0 0 40px #ff00d4; color:#00fff7; text-shadow:0 0 12px #00fff7; }
+.features h2 { margin-bottom: 1rem; color: #ff00d4; text-shadow: 0 0 8px #ff00d4; }
 
-  /* Opening Hours Table */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 3rem;
-    background: #111;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow:
-      0 0 25px #39ff14;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 4px #39ff14;
-  }
-  thead {
-    background: #ff00d4;
-    color: #111;
-    text-shadow:
-      0 0 10px #ff00d4;
-  }
-  th, td {
-    padding: 1rem 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid #222;
-  }
-  tbody tr:hover {
-    background: #1a1a1a;
-    box-shadow:
-      inset 0 0 20px #00fff7;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
-  }
-  tfoot td {
-    font-weight: 700;
-    color: #00fff7;
-    text-shadow:
-      0 0 10px #00fff7;
-  }
+/* Equipment Cards */
+.equipment-list { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 2rem; margin-bottom: 3rem; }
+.equipment-card { background: #111; border-radius: 12px; box-shadow: 0 0 20px #ff00d4, inset 0 0 25px #00f7ff; padding: 1rem; text-align: center; transition: box-shadow 0.3s, transform 0.3s; color: #39ff14; text-shadow:0 0 5px #39ff14; }
+.equipment-card:hover { box-shadow:0 0 40px #ff00d4,inset 0 0 50px #00fff7; transform: translateY(-10px); color: #00fff7; text-shadow:0 0 15px #00fff7; }
+.equipment-card img { max-width: 100%; border-radius: 12px; margin-bottom: 1rem; box-shadow:0 0 15px #ff00d4; filter: drop-shadow(0 0 6px #ff00d4); }
+.equipment-card h3 { margin-bottom: 0.5rem; color: #00fff7; text-shadow:0 0 10px #00fff7; }
+.equipment-card p { font-size: 0.95rem; color: #a6f3e6; text-shadow:0 0 3px #a6f3e6; }
 
-  /* Opening hours caption */
-  caption {
-    color: #eee;
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
+/* Opening Hours Table */
+table { width:100%; border-collapse:collapse; margin-bottom:3rem; background:#111; border-radius:12px; overflow:hidden; box-shadow:0 0 25px #39ff14; color:#39ff14; text-shadow:0 0 4px #39ff14; }
+thead { background:#ff00d4; color:#111; text-shadow:0 0 10px #ff00d4; }
+th, td { padding:1rem 1.5rem; text-align:center; border-bottom:1px solid #222; }
+tbody tr:hover { background:#1a1a1a; box-shadow:inset 0 0 20px #00fff7; color:#00fff7; text-shadow:0 0 10px #00fff7; }
+tfoot td { font-weight:700; color:#00fff7; text-shadow:0 0 10px #00fff7; }
 
-  /* Info Section in Hours */
-  #hours > section {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 10px #ff00d4;
-  }
-  #hours h2 {
-    margin-bottom: 0.5rem;
-  }
+/* Contact Section */
+.contact-section { background:#111; padding:2rem 2rem 3rem 2rem; border-radius:12px; box-shadow:0 0 40px #ff00d4,inset 0 0 50px #00fff7; max-width:600px; margin:2rem auto; color:#39ff14; text-shadow:0 0 5px #39ff14; }
+.contact-section h1 { margin-bottom:1rem; color:#00fff7; text-align:center; text-shadow:0 0 12px #00fff7,0 0 25px #00fff7; }
+.contact-section p { margin-bottom:2rem; text-align:center; font-size:1.1rem; color:#a6f3e6; text-shadow:0 0 5px #a6f3e6; }
+.contact-info { list-style:none; margin-bottom:2rem; padding-left:0; }
+.contact-info li { margin-bottom:0.75rem; font-size:1rem; color:#39ff14; text-shadow:0 0 6px #39ff14; }
+.contact-info strong { color:#ff00d4; text-shadow:0 0 8px #ff00d4; }
+.contact-form label { display:block; margin-bottom:0.5rem; font-weight:700; color:#00fff7; text-shadow:0 0 8px #00fff7; }
+.contact-form input, .contact-form textarea { width:100%; padding:0.75rem; margin-bottom:1.5rem; border-radius:12px; border:1.5px solid #39ff14; font-size:1rem; background:#111; color:#39ff14; text-shadow:0 0 5px #39ff14; }
+.contact-form input:focus, .contact-form textarea:focus { outline:none; border-color:#ff00d4; box-shadow:0 0 12px #ff00d4; color:#ff00d4; text-shadow:0 0 10px #ff00d4; background:#222; }
+.contact-form button { display:block; width:100%; padding:1rem; background:#39ff14; color:#111; font-weight:700; font-size:1.2rem; border:none; border-radius:50px; cursor:pointer; box-shadow:0 0 15px #39ff14,0 0 30px #39ff14; }
+.contact-form button:hover, .contact-form button:focus { box-shadow:0 0 30px #ff00d4,0 0 45px #ff00d4; background:#ff00d4; color:#111; outline:none; }
 
-  /* Contact Section */
-  .contact-section {
-    background: #111;
-    padding: 2rem 2rem 3rem 2rem;
-    border-radius: 12px;
-    box-shadow:
-      0 0 40px #ff00d4,
-      inset 0 0 50px #00fff7;
-    max-width: 600px;
-    margin: 2rem auto;
-    user-select: none;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-  }
-  .contact-section h1 {
-    margin-bottom: 1rem;
-    color: #00fff7;
-    text-align: center;
-    text-shadow:
-      0 0 12px #00fff7,
-      0 0 25px #00fff7;
-  }
-  .contact-section p {
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 5px #a6f3e6;
-  }
-  .contact-info {
-    list-style: none;
-    margin-bottom: 2rem;
-    padding-left: 0;
-  }
-  .contact-info li {
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-    color: #39ff14;
-    text-shadow:
-      0 0 6px #39ff14;
-  }
-  .contact-info strong {
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
-  }
+/* Reviews Section */
+#reviews { max-width:900px; margin:2rem auto 4rem auto; padding:1rem 2rem; background:#111; border-radius:12px; box-shadow:0 0 40px #00fff7,inset 0 0 50px #39ff14; color:#39ff14; }
+#reviews h2 { text-align:center; margin-bottom:2rem; color:#00fff7; text-shadow:0 0 20px #00fff7,0 0 40px #39ff14; }
+.review { background:#222; border-radius:12px; padding:1rem 1.5rem; margin-bottom:1.3rem; box-shadow:0 0 15px #39ff14; }
+.review:hover { box-shadow:0 0 30px #00fff7; }
+.review .name { font-weight:700; font-size:1.1rem; color:#ff00d4; text-shadow:0 0 8px #ff00d4; }
+.review .stars { color:#ffdc00; font-size:1.2rem; margin-bottom:0.4rem; text-shadow:0 0 6px #ffdc00,0 0 12px #ffdc00; }
+.review .text { font-size:1rem; color:#a6f3e6; text-shadow:0 0 5px #a6f3e6; }
 
-  .contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: #00fff7;
-    text-shadow:
-      0 0 8px #00fff7;
-    user-select: none;
-  }
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1.5rem;
-    border-radius: 12px;
-    border: 1.5px solid #39ff14;
-    font-size: 1rem;
-    background: #111;
-    color: #39ff14;
-    text-shadow:
-      0 0 5px #39ff14;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    resize: vertical;
-  }
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: #ff00d4;
-    box-shadow:
-      0 0 12px #ff00d4;
-    color: #ff00d4;
-    text-shadow:
-      0 0 10px #ff00d4;
-    background: #222;
-  }
-  .contact-form button {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    background: #39ff14;
-    color: #111;
-    font-weight: 700;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow:
-      0 0 15px #39ff14,
-      0 0 30px #39ff14;
-    transition: box-shadow 0.3s ease-in-out;
-    user-select: none;
-  }
-  .contact-form button:hover,
-  .contact-form button:focus {
-    box-shadow:
-      0 0 30px #ff00d4,
-      0 0 45px #ff00d4;
-    background: #ff00d4;
-    color: #111;
-    outline: none;
-  }
+/* Music Button */
+#musicControl { position:fixed; bottom:20px; right:20px; padding:0.8rem 1.5rem; font-size:1rem; border-radius:50px; animation: neonPulse 3s ease-in-out infinite; }
 
-  /* Reviews Section */
-  #reviews {
-    max-width: 900px;
-    margin: 2rem auto 4rem auto;
-    padding: 1rem 2rem;
-    background: #111;
-    border-radius: 12px;
-    box-shadow:
-      0 0 40px #00fff7,
-      inset 0 0 50px #39ff14;
-    color: #39ff14;
-    user-select: none;
-  }
-  #reviews h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #00fff7;
-    text-shadow:
-      0 0 20px #00fff7,
-      0 0 40px #39ff14;
-  }
-  .review {
-    background: #222;
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    margin-bottom: 1.3rem;
-    box-shadow:
-      0 0 15px #39ff14;
-    transition: box-shadow 0.3s ease;
-  }
-  .review:hover {
-    box-shadow:
-      0 0 30px #00fff7;
-  }
-  .review .name {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #ff00d4;
-    text-shadow:
-      0 0 8px #ff00d4;
-  }
-  .review .stars {
-    color: #ffdc00;
-    font-size: 1.2rem;
-    margin-bottom: 0.4rem;
-    text-shadow:
-      0 0 6px #ffdc00,
-      0 0 12px #ffdc00;
-  }
-  .review .text {
-    font-size: 1rem;
-    color: #a6f3e6;
-    text-shadow:
-      0 0 5px #a6f3e6;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .features, .equipment-list {
-      grid-template-columns: 1fr;
-    }
-    nav ul {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .container {
-      margin: 1rem;
-    }
-  }
+/* Responsive */
+@media (max-width:600px) { .features,.equipment-list { grid-template-columns:1fr; } nav ul { flex-direction:column; gap:1rem; } .container { margin:1rem; } }
 </style>
 </head>
 <body>
 
+<!-- Splash Screen -->
+<div id="splash">Welcome to FitLife Gym Store</div>
+
+<!-- Background Music -->
+<audio id="backgroundMusic" autoplay loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+<button id="musicControl" class="btn">Pause Music</button>
+
 <header>
-  <nav>
-    <ul>
-      <li><a href="#" class="active" data-page="home">Home</a></li>
-      <li><a href="#" data-page="hours">Opening Hours</a></li>
-      <li><a href="#" data-page="contact">Contact Us</a></li>
-      <li><a href="#" data-page="reviews">Reviews</a></li>
-    </ul>
-  </nav>
+<nav>
+<ul>
+<li><a href="#" class="active" data-page="home">Home</a></li>
+<li><a href="#" data-page="hours">Opening Hours</a></li>
+<li><a href="#" data-page="contact">Contact Us</a></li>
+<li><a href="#" data-page="reviews">Reviews</a></li>
+</ul>
+</nav>
 </header>
 
 <main>
-  <section id="home" class="container page active">
-    <div class="hero">
-      <h1>Welcome to FitLife Gym Store</h1>
-      <p>Your one-stop shop for the latest gym equipment and gear.</p>
-      <button class="btn">Shop Now</button>
-    </div>
-    <div class="features">
-      <div>
-        <h2>Quality Equipment</h2>
-        <p>We only stock the best brands to help you reach your fitness goals.</p>
-      </div>
-      <div>
-        <h2>Expert Support</h2>
-        <p>Our team is here to help you find exactly what you need.</p>
-      </div>
-      <div>
-        <h2>Fast Shipping</h2>
-        <p>Get your gear quickly and start your workout without delay.</p>
-      </div>
-    </div>
+<section id="home" class="container page active">
+<div class="hero">
+<h1>Welcome to FitLife Gym Store</h1>
+<p>Your one-stop shop for the latest gym equipment and gear.</p>
+<button class="btn">Shop Now</button>
+</div>
 
-    <div class="equipment-list">
-      <div class="equipment-card">
-        <img src="https://www.southsidefitness.com.au/wp-content/uploads/2019/08/t101.png" alt="Treadmill" />
-        <h3>Treadmill</h3>
-        <p>Top-tier cardio machine to keep you moving.</p>
-      </div>
-      <div class="equipment-card">
-        <img src="https://samsfitness.com.au/wp-content/uploads/2020/09/CGHEXDB40KG-rubber-hex-dumbbell-pair.jpg" alt="Dumbbells" />
-        <h3>Dumbbells</h3>
-        <p>Perfect weights for strength training at any level.</p>
-      </div>
-      <div class="equipment-card">
-        <img src="https://contents.mediadecathlon.com/p2940263/k$a5497573eda45c1fa216dc2723cbb610/beginner-yoga-mat-180-cm-x-58-cm-x-5-mm-dark-blue-domyos-8928284.jpg"Yoga Mat" />
-        <h3>Yoga Mat</h3>
-        <p>Comfortable and durable mat for all your yoga sessions.</p>
-      </div>
-    </div>
-  </section>
+<div class="features">
+<div><h2>Quality Equipment</h2><p>We only stock the best brands to help you reach your fitness goals.</p></div>
+<div><h2>Expert Support</h2><p>Our team is here to help you find exactly what you need.</p></div>
+<div><h2>Fast Shipping</h2><p>Get your gear quickly and start your workout without delay.</p></div>
+</div>
 
-  <section id="hours" class="container page" aria-label="Opening Hours">
-    <h2>Opening Hours</h2>
-    <table>
-      <caption>FitLife Gym Store Weekly Opening Hours</caption>
-      <thead>
-        <tr><th>Day</th><th>Opening Time</th><th>Closing Time</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Monday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Tuesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Wednesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Thursday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Friday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-        <tr><td>Saturday</td><td>8:00 AM</td><td>8:00 PM</td></tr>
-        <tr><td>Sunday</td><td>8:00 AM</td><td>6:00 PM</td></tr>
-      </tbody>
-      <tfoot>
-        <tr><td colspan="3">Open every day for your convenience!</td></tr>
-      </tfoot>
-    </table>
-    <section>
-      <h3>Need assistance during opening hours?</h3>
-      <p>Contact our support team anytime—we're here to help you find the perfect equipment.</p>
-    </section>
-  </section>
+<div class="equipment-list">
+<div class="equipment-card"><img src="https://www.southsidefitness.com.au/wp-content/uploads/2019/08/t101.png" alt="Treadmill"><h3>Treadmill</h3><p>Top-tier cardio machine to keep you moving.</p></div>
+<div class="equipment-card"><img src="https://samsfitness.com.au/wp-content/uploads/2020/09/CGHEXDB40KG-rubber-hex-dumbbell-pair.jpg" alt="Dumbbells"><h3>Dumbbells</h3><p>Perfect weights for strength training at any level.</p></div>
+<div class="equipment-card"><img src="https://contents.mediadecathlon.com/p2940263/k$a5497573eda45c1fa216dc2723cbb610/beginner-yoga-mat-180-cm-x-58-cm-x-5-mm-dark-blue-domyos-8928284.jpg" alt="Yoga Mat"><h3>Yoga Mat</h3><p>Comfortable and durable mat for all your yoga sessions.</p></div>
+</div>
+</section>
 
-  <section id="contact" class="container page" aria-label="Contact Us">
-    <div class="contact-section">
-      <h1>Contact Us</h1>
-      <p>Have questions? Reach out and we'll get back to you as soon as possible.</p>
-      <ul class="contact-info" aria-live="polite">
-        <li><strong>Phone:</strong> (123) 456-7890</li>
-        <li><strong>Email:</strong> support@fitlifegymstore.com</li>
-        <li><strong>Address:</strong> 123 Fitness Ave, Wellness City, USA</li>
-      </ul>
-      <form class="contact-form" aria-label="Contact Form" onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you shortly.'); this.reset();">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required aria-required="true" />
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required aria-required="true" />
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
+<section id="hours" class="container page">
+<h2>Opening Hours</h2>
+<table>
+<caption>FitLife Gym Store Weekly Opening Hours</caption>
+<thead><tr><th>Day</th><th>Opening Time</th><th>Closing Time</th></tr></thead>
+<tbody>
+<tr><td>Monday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
+<tr><td>Tuesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
+<tr><td>Wednesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
+<tr><td>Thursday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
+<tr><td>Friday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
+<tr><td>Saturday</td><td>8:00 AM</td><td>8:00 PM</td></tr>
+<tr><td>Sunday</td><td>8:00 AM</td><td>6:00 PM</td></tr>
+</tbody>
+<tfoot><tr><td colspan="3">Open every day for your convenience!</td></tr></tfoot>
+</table>
+</section>
 
-  <section id="reviews" class="container page" aria-label="Customer Reviews">
-    <h2>Customer Reviews</h2>
-    <!-- Reviews injected by JS -->
-  </section>
+<section id="contact" class="container page">
+<div class="contact-section">
+<h1>Contact Us</h1>
+<p>Have questions? Reach out and we'll get back to you as soon as possible.</p>
+<ul class="contact-info">
+<li><strong>Phone:</strong> (123) 456-7890</li>
+<li><strong>Email:</strong> support@fitlifegymstore.com</li>
+<li><strong>Address:</strong> 123 Fitness Ave, Wellness City, USA</li>
+</ul>
+<form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you shortly.'); this.reset();">
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required />
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required />
+<label for="message">Message</label>
+<textarea id="message" name="message" rows="5" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</div>
+</section>
+
+<section id="reviews" class="container page">
+<h2>Customer Reviews</h2>
+<div class="review"><div class="name">Alex P.</div><div class="stars">★★★★★</div><div class="text">Amazing equipment and fast delivery!</div></div>
+<div class="review"><div class="name">Samantha L.</div><div class="stars">★★★★☆</div><div class="text">Friendly staff and quality products.</div></div>
+<div class="review"><div class="name">Jordan K.</div><div class="stars">★★★★★</div><div class="text">My go-to store for gym essentials. Highly recommend!</div></div>
+</section>
 </main>
 
 <script>
-  // Navigation toggle for pages
-  const navLinks = document.querySelectorAll('nav ul li a');
-  const pages = document.querySelectorAll('.page');
+// Splash screen fade out after 2 seconds
+window.addEventListener('load', () => { 
+  setTimeout(() => { document.getElementById('splash').style.opacity = 0; setTimeout(()=>{document.getElementById('splash').style.display='none'},1000); }, 2000);
+});
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const pageName = link.getAttribute('data-page');
-      // Remove active class from all links and add to clicked
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      // Show the corresponding page and hide others
-      pages.forEach(page => {
-        if (page.id === pageName) {
-          page.classList.add('active');
-          page.style.display = 'block';
-        } else {
-          page.classList.remove('active');
-          page.style.display = 'none';
-        }
-      });
-    });
-  });
+// Simple page navigation
+document.querySelectorAll('nav a').forEach(link => {
+link.addEventListener('click', e => {
+e.preventDefault();
+document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+const pageId = link.getAttribute('data-page');
+document.getElementById(pageId).classList.add('active');
+document.querySelectorAll('nav a').forEach(l=>l.classList.remove('active'));
+link.classList.add('active');
+});
+});
 
-  // Initially show only home page
-  pages.forEach(page => {
-    if (!page.classList.contains('active')) {
-      page.style.display = 'none';
-    }
-  });
-
-  // Reviews data
-  const reviewsData = [
-    {name: "Hadassah Landry", text: "Amazing service and top-quality gear. Highly recommend!"},
-    {name: "Jaxx Huffman", text: "The best gym store I’ve ever been to. Five stars!"},
-    {name: "Hayley Orozco", text: "Love the variety and fast shipping."},
-    {name: "Keanu Yoder", text: "Great customer support and quality products."},
-    {name: "Emerie Franklin", text: "I found everything I needed and more!"},
-    {name: "Simon Friedman", text: "Solid equipment and awesome staff."},
-    {name: "Aspyn Phillips", text: "Fantastic experience shopping here."},
-    {name: "Andrew Soto", text: "The equipment is durable and affordable."},
-    {name: "Brynlee Sawyer", text: "I’m very happy with my purchase."},
-    {name: "Jefferson Collier", text: "Highly recommend for gym enthusiasts."},
-    {name: "Ivory Mata", text: "Customer service went above and beyond."},
-    {name: "Ray Moore", text: "Great quality and quick delivery."},
-    {name: "Emily Decker", text: "Love the neon vibe of the store and products."},
-    {name: "Taylor Bernal", text: "Everything was perfect, no complaints!"},
-    {name: "Emmeline Zhang", text: "Fast, reliable, and excellent gear."},
-    {name: "Isaias Bridges", text: "Perfect for home gym setups."},
-    {name: "Elora Richard", text: "Affordable prices and good quality."},
-    {name: "Ahmed Casey", text: "Very satisfied with my treadmill purchase."},
-    {name: "Sylvia Wilson", text: "Easy to navigate site and great deals."},
-    {name: "Daniel Maxwell", text: "Best place for fitness gear online."},
-    {name: "Kyla Mason", text: "Highly recommend for beginners and pros."},
-    {name: "Brandon Juarez", text: "Fast shipping and friendly staff."},
-    {name: "Juliet Harrell", text: "Quality products that last."},
-    {name: "Nelson Peck", text: "Excellent customer service experience."},
-    {name: "Crystal Felix", text: "Love the variety of equipment."},
-    {name: "Rodney Fischer", text: "Great prices and quality."},
-    {name: "Maci Stokes", text: "I’m a repeat customer for a reason."},
-    {name: "Santana Manning", text: "Five stars for sure!"},
-    {name: "Jennifer Noble", text: "The best selection and fast delivery."},
-    {name: "Idris Allen", text: "Very professional and helpful."},
-    {name: "Riley Glass", text: "I found the perfect dumbbells here."},
-    {name: "Allan Spencer", text: "Impressed with their product range."},
-    {name: "Alyssa Holland", text: "Friendly staff and fast support."},
-    {name: "Brady Dunn", text: "My go-to gym store now."},
-    {name: "Olive Swanson", text: "Great quality yoga mats."},
-    {name: "Hugo Santiago", text: "Shipping was quick and products are top-notch."},
-    {name: "Nyla Cline", text: "Highly recommend for fitness gear."},
-    {name: "Cullen Charles", text: "Perfect for all workout needs."},
-    {name: "Jenna Bernard", text: "Loved the shopping experience."},
-    {name: "Jair Stanley", text: "Affordable and great quality."},
-    {name: "Gracelyn Collins", text: "Customer service is outstanding."},
-    {name: "Miles Miranda", text: "Excellent products at great prices."},
-    {name: "Amina Wood", text: "My favorite gym equipment store."},
-    {name: "Carson Patterson", text: "Will definitely buy again."},
-    {name: "Kaylee Yoder", text: "Top-notch gear and fast delivery."},
-    {name: "Johan Bartlett", text: "Friendly and helpful team."},
-    {name: "Aubrielle Ibarra", text: "I recommend this store to everyone."},
-    {name: "Asa Conway", text: "Best place to buy fitness equipment."},
-    {name: "Ryann Humphrey", text: "High-quality products and great support."},
-    {name: "Krew Woods", text: "Very happy with my order."},
-    {name: "Reese Camacho", text: "Fantastic selection and service."},
-    {name: "Tatum Olson", text: "Easy to order and quick shipping."},
-    {name: "Isabel Schwartz", text: "Great prices and quality."},
-    {name: "Edwin Miller", text: "Reliable and trustworthy store."},
-    {name: "Isabella Cameron", text: "Highly recommend their yoga mats."},
-    {name: "Rayan Nava", text: "Perfect service and products."},
-    {name: "Scout Perry", text: "Will definitely return for more!"}
-  ];
-
-  // Create review elements
-  const reviewsContainer = document.getElementById('reviews');
-  reviewsData.forEach(({name, text}) => {
-    const reviewEl = document.createElement('div');
-    reviewEl.className = 'review';
-    reviewEl.innerHTML = `
-      <div class="name">${name}</div>
-      <div class="stars" aria-label="5 star rating">★★★★★</div>
-      <div class="text">${text}</div>
-    `;
-    reviewsContainer.appendChild(reviewEl);
-  });
+// Music Play/Pause Control
+const music = document.getElementById('backgroundMusic');
+const musicControl = document.getElementById('musicControl');
+musicControl.addEventListener('click', () => {
+  if(music.paused){ music.play(); musicControl.textContent="Pause Music"; } 
+  else { music.pause(); musicControl.textContent="Play Music"; }
+});
 </script>
-
 </body>
 </html>
