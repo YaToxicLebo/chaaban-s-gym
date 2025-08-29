@@ -179,7 +179,8 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 <button class="closeCart">X</button>
 <div id="cartItems"></div>
 <div id="cartTotal" style="margin-top:1rem;font-weight:bold;color:#39ff14;">Total: $0</div>
-<button id="checkoutBtn" style="margin-top:10px;width:100%;padding:1rem;background:#ff00d4;color:#111;font-weight:700;border:none;border-radius:12px;cursor:pointer;">Checkout</button>
+<!-- Checkout Button Added -->
+<button id="checkoutBtn" style="margin-top:10px;padding:0.8rem 1.5rem;background:#00fff7;color:#111;border:none;border-radius:12px;cursor:pointer;">Checkout</button>
 </div>
 </div>
 
@@ -201,7 +202,10 @@ pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
 });
 
 // Reviews Data
-const reviewsData=[ /* your reviews */ ];
+const reviewsData=[
+{name: "Jaxx Huffman", text: "The best gym store I’ve ever been to. Five stars!"},
+{name: "Hayley Orozco", text: "Love the variety and fast shipping."}
+];
 const reviewsContainer = document.getElementById('reviews');
 reviewsData.forEach(({name,text})=>{
 const reviewEl=document.createElement('div');
@@ -286,15 +290,19 @@ cartModal.addEventListener('click', e=>{ if(e.target===cartModal) cartModal.styl
 // Checkout Button
 const checkoutBtn = document.getElementById('checkoutBtn');
 checkoutBtn.addEventListener('click', () => {
-if(cart.length === 0) {
-alert("Your cart is empty!");
-return;
-}
-let total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-alert(`Thank you for your purchase! Your total is $${total.toFixed(2)}`);
-cart = [];
-updateCart();
-cartModal.style.display = 'none';
+    if(cart.length === 0){
+        alert('Your cart is empty!');
+        return;
+    }
+    let summary = 'Order Summary:\n';
+    cart.forEach(item => {
+        summary += `${item.name} x ${item.qty} - $${(item.price*item.qty).toFixed(2)}\n`;
+    });
+    summary += `Total: $${cart.reduce((a,b)=>a+b.price*b.qty,0).toFixed(2)}`;
+    alert(summary + '\n\nThank you for your purchase!');
+    cart = [];
+    updateCart();
+    cartModal.style.display='none';
 });
 </script>
 </body>
