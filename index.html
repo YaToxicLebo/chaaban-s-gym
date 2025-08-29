@@ -154,10 +154,18 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 </main>
 
 <!-- Music Controls -->
-<audio id="bgmusic" loop>
-<source src="https://www.youtube.com/watch?v=aBXniMJCQf0&list=RDaBXniMJCQf0&start_radio=1&ab_channel=UltraRecords" type="audio/mpeg">
-</audio>
 <button id="musicBtn" style="position:fixed;bottom:20px;right:20px;padding:10px 20px;background:#00fff7;border:none;border-radius:10px;color:#111;cursor:pointer;">Play Music</button>
+
+<!-- Hidden YouTube Iframe for Audio -->
+<iframe
+  id="bgYouTube"
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/aBXniMJCQf0?autoplay=0&loop=1&playlist=aBXniMJCQf0&controls=0&mute=0&enablejsapi=1"
+  frameborder="0"
+  allow="autoplay"
+  style="position:absolute; left:-9999px;"
+></iframe>
 
 <script>
 // Splash Fade In/Out
@@ -243,38 +251,6 @@ reviewEl.innerHTML=`<div class="name">${name}</div><div class="stars" aria-label
 reviewsContainer.appendChild(reviewEl);
 });
 
-// Music Button
+// Music Button for YouTube Embed
 const musicBtn = document.getElementById('musicBtn');
-const bgMusic = document.getElementById('bgmusic');
-musicBtn.addEventListener('click',()=>{
-if(bgMusic.paused){ bgMusic.play(); musicBtn.textContent='Pause Music'; }
-else{ bgMusic.pause(); musicBtn.textContent='Play Music'; }
-});
-
-// Particles Effect
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let w=canvas.width=window.innerWidth;
-let h=canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
-
-const particlesArray=[];
-for(let i=0;i<120;i++){ particlesArray.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2+1, dx:(Math.random()-0.5)*1.5, dy:(Math.random()-0.5)*1.5}); }
-
-function animateParticles(){
-ctx.clearRect(0,0,w,h);
-particlesArray.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle='rgba(0,255,255,0.7)';
-ctx.fill();
-p.x+=p.dx; p.y+=p.dy;
-if(p.x<0||p.x>w)p.dx*=-1;
-if(p.y<0||p.y>h)p.dy*=-1;
-});
-requestAnimationFrame(animateParticles);
-}
-animateParticles();
-</script>
-</body>
-</html>
+const bgYouTube = document.getElement
