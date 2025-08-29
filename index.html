@@ -160,14 +160,11 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 
 <section id="reviews" class="container page">
 <h2>Customer Reviews</h2>
-<!-- Reviews injected by JS -->
 </section>
-
-</main>
 
 <!-- Music Controls -->
 <audio id="bgmusic" loop>
-<source src="https://www.youtube.com/watch?v=aBXniMJCQf0&list=RDaBXniMJCQf0&start_radio=1&ab_channel=UltraRecords" type="audio/mpeg">
+<source src="your-music-file.mp3" type="audio/mpeg">
 </audio>
 <button id="musicBtn" style="position:fixed;bottom:20px;right:20px;padding:10px 20px;background:#00fff7;border:none;border-radius:10px;color:#111;cursor:pointer;">Play Music</button>
 
@@ -184,7 +181,7 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 </div>
 
 <script>
-// Splash Fade In/Out
+// Splash
 window.addEventListener('load', () => { document.querySelectorAll('.container')[0].style.display='block'; });
 
 // Navigation
@@ -200,12 +197,12 @@ pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
 });
 });
 
-// Music Button
+// Music
 const musicBtn = document.getElementById('musicBtn');
 const bgMusic = document.getElementById('bgmusic');
 musicBtn.addEventListener('click',()=>{ if(bgMusic.paused){ bgMusic.play(); musicBtn.textContent='Pause Music'; } else{ bgMusic.pause(); musicBtn.textContent='Play Music'; } });
 
-// Particles Effect
+// Particles
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 let w=canvas.width=window.innerWidth;
@@ -216,8 +213,110 @@ for(let i=0;i<120;i++){ particlesArray.push({x:Math.random()*w, y:Math.random()*
 function animateParticles(){ ctx.clearRect(0,0,w,h); particlesArray.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(0,255,255,0.7)'; ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>w)p.dx*=-1; if(p.y<0||p.y>h)p.dy*=-1; }); requestAnimationFrame(animateParticles); }
 animateParticles();
 
-// Shopping Cart & Checkout & Reviews
-// (Insert previous JS I provided here, full cart + checkout + full reviews)
+// Shopping Cart & Reviews
+let cart=[];
+const cartBtn=document.getElementById('cartBtn');
+const cartModal=document.getElementById('cartModal');
+const closeCart=document.querySelector('.closeCart');
+const cartItems=document.getElementById('cartItems');
+const cartTotal=document.getElementById('cartTotal');
+const checkoutBtn=document.getElementById('checkoutBtn');
+
+document.querySelectorAll('.equipment-card button').forEach(btn=>{
+btn.addEventListener('click', e=>{
+const card=e.target.closest('.equipment-card');
+const item={name:card.dataset.name, price:Number(card.dataset.price), qty:1};
+const exist=cart.find(i=>i.name===item.name);
+if(exist){ exist.qty+=1; } else{ cart.push(item); }
+updateCart();
+});
+});
+
+function updateCart(){
+cartItems.innerHTML='';
+let total=0;
+cart.forEach(i=>{
+const div=document.createElement('div');
+div.className='cart-item';
+div.innerHTML=`${i.name} x ${i.qty} <span>$${i.price*i.qty}</span>`;
+cartItems.appendChild(div);
+total+=i.price*i.qty;
+});
+cartTotal.textContent=`Total: $${total}`;
+cartBtn.textContent=`Cart (${cart.reduce((a,b)=>a+b.qty,0)})`;
+}
+
+cartBtn.addEventListener('click',()=>{ cartModal.style.display='flex'; });
+closeCart.addEventListener('click',()=>{ cartModal.style.display='none'; });
+checkoutBtn.addEventListener('click',()=>{
+if(cart.length>0){ alert('Thanks for your purchase!'); cart=[]; updateCart(); cartModal.style.display='none'; } else{ alert('Cart is empty!'); }
+});
+
+// Reviews Data
+const reviewsData=[
+{name:"Keanu Yoder",text:"Great customer support and quality products."},
+{name:"Emerie Franklin",text:"I found everything I needed and more!"},
+{name:"Simon Friedman",text:"Solid equipment and awesome staff."},
+{name:"Aspyn Phillips",text:"Fantastic experience shopping here."},
+{name:"Andrew Soto",text:"The equipment is durable and affordable."},
+{name:"Brynlee Sawyer",text:"I’m very happy with my purchase."},
+{name:"Jefferson Collier",text:"Highly recommend for gym enthusiasts."},
+{name:"Ivory Mata",text:"Customer service went above and beyond."},
+{name:"Ray Moore",text:"Great quality and quick delivery."},
+{name:"Emily Decker",text:"Love the neon vibe of the store and products."},
+{name:"Taylor Bernal",text:"Everything was perfect, no complaints!"},
+{name:"Emmeline Zhang",text:"Fast, reliable, and excellent gear."},
+{name:"Isaias Bridges",text:"Perfect for home gym setups."},
+{name:"Elora Richard",text:"Affordable prices and good quality."},
+{name:"Ahmed Casey",text:"Very satisfied with my treadmill purchase."},
+{name:"Sylvia Wilson",text:"Easy to navigate site and great deals."},
+{name:"Daniel Maxwell",text:"Best place for fitness gear online."},
+{name:"Kyla Mason",text:"Highly recommend for beginners and pros."},
+{name:"Brandon Juarez",text:"Fast shipping and friendly staff."},
+{name:"Juliet Harrell",text:"Quality products that last."},
+{name:"Nelson Peck",text:"Excellent customer service experience."},
+{name:"Crystal Felix",text:"Love the variety of equipment."},
+{name:"Rodney Fischer",text:"Great prices and quality."},
+{name:"Maci Stokes",text:"I’m a repeat customer for a reason."},
+{name:"Santana Manning",text:"Five stars for sure!"},
+{name:"Jennifer Noble",text:"The best selection and fast delivery."},
+{name:"Idris Allen",text:"Very professional and helpful."},
+{name:"Riley Glass",text:"I found the perfect dumbbells here."},
+{name:"Allan Spencer",text:"Impressed with their product range."},
+{name:"Alyssa Holland",text:"Friendly staff and fast support."},
+{name:"Brady Dunn",text:"My go-to gym store now."},
+{name:"Olive Swanson",text:"Great quality yoga mats."},
+{name:"Hugo Santiago",text:"Shipping was quick and products are top-notch."},
+{name:"Nyla Cline",text:"Highly recommend for fitness gear."},
+{name:"Cullen Charles",text:"Perfect for all workout needs."},
+{name:"Jenna Bernard",text:"Loved the shopping experience."},
+{name:"Jair Stanley",text:"Affordable and great quality."},
+{name:"Gracelyn Collins",text:"Customer service is outstanding."},
+{name:"Miles Miranda",text:"Excellent products at great prices."},
+{name:"Amina Wood",text:"My favorite gym equipment store."},
+{name:"Carson Patterson",text:"Will definitely buy again."},
+{name:"Kaylee Yoder",text:"Top-notch gear and fast delivery."},
+{name:"Johan Bartlett",text:"Friendly and helpful team."},
+{name:"Aubrielle Ibarra",text:"I recommend this store to everyone."},
+{name:"Asa Conway",text:"Best place to buy fitness equipment."},
+{name:"Ryann Humphrey",text:"High-quality products and great support."},
+{name:"Krew Woods",text:"Very happy with my order."},
+{name:"Reese Camacho",text:"Fantastic selection and service."},
+{name:"Tatum Olson",text:"Easy to order and quick shipping."},
+{name:"Isabel Schwartz",text:"Great prices and quality."},
+{name:"Edwin Miller",text:"Reliable and trustworthy store."},
+{name:"Isabella Cameron",text:"Highly recommend their yoga mats."},
+{name:"Rayan Nava",text:"Perfect service and products."},
+{name:"Scout Perry",text:"Will definitely return for more!"}
+];
+
+const reviewsContainer=document.getElementById('reviews');
+reviewsData.forEach(({name,text})=>{
+const reviewEl=document.createElement('div');
+reviewEl.className='review';
+reviewEl.innerHTML=`<div class="name">${name}</div><div class="stars" aria-label="5 star rating">★★★★★</div><div class="text">${text}</div>`;
+reviewsContainer.appendChild(reviewEl);
+});
 </script>
 </body>
 </html>
