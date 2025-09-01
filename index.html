@@ -1,5 +1,3 @@
-
-html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,7 +120,7 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 </div>
 
 <div class="equipment-list">
-<!-- Equipment Cards -->
+<!-- Existing + New items -->
 <div class="equipment-card" data-name="Treadmill" data-price="1200"><img src="https://www.southsidefitness.com.au/wp-content/uploads/2019/08/t101.png" alt="Treadmill"><h3>Treadmill</h3><p>Top-tier cardio machine to keep you moving.</p><button>Add to Cart</button></div>
 <div class="equipment-card" data-name="Dumbbells" data-price="80"><img src="https://samsfitness.com.au/wp-content/uploads/2020/09/CGHEXDB40KG-rubber-hex-dumbbell-pair.jpg" alt="Dumbbells"><h3>Dumbbells</h3><p>Perfect weights for strength training at any level.</p><button>Add to Cart</button></div>
 <div class="equipment-card" data-name="Yoga Mat" data-price="40"><img src="https://contents.mediadecathlon.com/p2940263/k$a5497573eda45c1fa216dc2723cbb610/beginner-yoga-mat-180-cm-x-58-cm-x-5-mm-dark-blue-domyos-8928284.jpg" alt="Yoga Mat"><h3>Yoga Mat</h3><p>Comfortable and durable mat for all your yoga sessions.</p><button>Add to Cart</button></div>
@@ -191,31 +189,32 @@ tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
 
 <script>
 // Splash
-window.addEventListener('load', () => { document.querySelectorAll('.container')[0].style.display='block'; });
+window.addEventListener('load', () => { 
+  document.querySelectorAll('.container')[0].style.display='block'; 
+
+  // Auto-play music after splash
+  setTimeout(() => {
+    bgMusic.play().then(() => {
+      musicBtn.textContent = 'Pause Music';
+    }).catch(err => {
+      console.log("Autoplay blocked:", err);
+      musicBtn.textContent = 'Play Music';
+    });
+  }, 2200);
+});
 
 // Navigation
 const navLinks = document.querySelectorAll('nav ul li a');
 const pages = document.querySelectorAll('.page');
 navLinks.forEach(link=>{
-link.addEventListener('click', e=>{
-e.preventDefault();
-const pageName = link.dataset.page;
-navLinks.forEach(l=>l.classList.remove('active'));
-link.classList.add('active');
-pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
-});
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const pageName = link.dataset.page;
+    navLinks.forEach(l=>l.classList.remove('active'));
+    link.classList.add('active');
+    pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
+  });
 });
 
 // Music
 const musicBtn = document.getElementById('musicBtn');
-const bgMusic = document.getElementById('bgmusic');
-bgMusic.volume = 0.5;
-
-// Start music automatically after splash fades
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    bgMusic.play().then(() => {
-      musicBtn.textContent = 'Pause Music';
-    }).catch(err => {
-      console.log
-```
