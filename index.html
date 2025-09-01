@@ -1,220 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FitLife Gym Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-<style>
-/* Reset & basics */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-body { background: #0d0d0d; color: #eee; overflow-x: hidden; user-select: none; }
-a { color: #39ff14; text-decoration: none; cursor: pointer; transition: color 0.3s; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitLife Gym Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & basics */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Orbitron', sans-serif; background: black; color: white; overflow-x: hidden; }
 
-/* Splash Screen */
-#splash { position: fixed; top:0; left:0; width:100%; height:100%; background:#111; display:flex; justify-content:center; align-items:center; flex-direction:column; z-index:9999; animation: fadeOut 1s ease forwards; animation-delay:2s; }
-#splash h1 { font-size:3rem; color:#ff00ff; text-shadow: 0 0 10px #ff00ff, 0 0 30px #ff00ff; animation: pulse 1.5s infinite; }
-@keyframes fadeOut { to { opacity:0; visibility:hidden; } }
-@keyframes pulse { 0%,100%{ text-shadow:0 0 10px #ff00ff,0 0 30px #ff00ff; } 50%{ text-shadow:0 0 25px #ff00ff,0 0 50px #ff00ff; } }
+    /* Splash screen */
+    #splash {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: black; display: flex; align-items: center; justify-content: center;
+      z-index: 1000; font-size: 2em; color: cyan;
+    }
 
-/* Header & Navigation */
-header { background: #111; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; box-shadow: 0 0 15px #00fff7; }
-nav ul { display: flex; list-style: none; justify-content: center; gap: 2rem; }
-nav ul li a { font-weight:700; padding:0.5rem 1rem; border-radius:6px; transition: all 0.3s; }
-nav ul li a.active, nav ul li a:hover { background:#00fff7; color:#111; box-shadow:0 0 10px #00fff7,0 0 20px #00fff7; }
+    /* Header */
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1em; background: #111; }
+    nav ul { list-style: none; display: flex; gap: 1em; }
+    nav a { text-decoration: none; color: white; transition: color 0.3s; }
+    nav a:hover, nav a.active { color: cyan; }
+    #cartBtn, #musicBtn { background: cyan; border: none; padding: 0.5em 1em; cursor: pointer; border-radius: 8px; margin-left: 10px; }
 
-/* Page Container */
-.container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; display:none; }
+    /* Pages */
+    .page { display: none; padding: 2em; }
+    #home { display: block; }
 
-/* Hero */
-.hero { text-align:center; padding:4rem 1rem; background:#111; border-radius:12px; box-shadow: 0 0 20px #ff00ff, inset 0 0 30px #ff00ff; color:#ff6aff; }
-.hero h1 { font-size:3rem; text-shadow:0 0 8px #ff00ff,0 0 20px #ff00ff; margin-bottom:1rem; }
-.hero p { font-size:1.3rem; color:#f0aaff; text-shadow:0 0 5px #f0aaff; margin-bottom:2rem; }
-.btn { background: linear-gradient(45deg,#00f7ff,#ff00d4,#39ff14); background-size:300% 300%; animation: neonPulse 3s ease-in-out infinite; color:#111; padding:0.9rem 2.5rem; border-radius:50px; font-weight:700; font-size:1.2rem; border:none; cursor:pointer; box-shadow:0 0 10px #00f7ff,0 0 20px #ff00d4,0 0 30px #39ff14; transition:0.3s; }
-.btn:hover { box-shadow:0 0 25px #00f7ff,0 0 40px #ff00d4,0 0 60px #39ff14; }
-@keyframes neonPulse { 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+    /* Equipment cards */
+    .equipment-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5em; }
+    .equipment-card {
+      background: #111; padding: 1em; border-radius: 12px; text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .equipment-card:hover { transform: translateY(-5px); box-shadow: 0 0 15px cyan; }
+    .equipment-card img { max-width: 100%; border-radius: 12px; }
 
-/* Features */
-.features { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-bottom:3rem; }
-.features div { background:#111; border-radius:12px; padding:2rem; text-align:center; box-shadow:0 0 15px #39ff14, inset 0 0 20px #00f7ff; transition:0.3s; }
-.features div:hover { transform:translateY(-12px); box-shadow:0 0 30px #00fff7, inset 0 0 40px #ff00d4; color:#00fff7; }
-.features h2 { color:#ff00d4; margin-bottom:1rem; }
+    /* Cart modal */
+    #cartModal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); justify-content: center; align-items: center;
+      z-index: 2000;
+    }
+    #cartModalContent { background: #111; padding: 2em; border-radius: 12px; width: 90%; max-width: 500px; }
+    .cart-item { display: flex; justify-content: space-between; margin-bottom: 1em; }
 
-/* Equipment Cards */
-.equipment-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; margin-bottom:3rem; }
-.equipment-card { background:#111; border-radius:12px; box-shadow:0 0 20px #ff00d4, inset 0 0 25px #00f7ff; padding:1rem; text-align:center; transition:0.3s; position:relative; }
-.equipment-card:hover { transform:translateY(-10px); box-shadow:0 0 40px #ff00d4, inset 0 0 50px #00fff7; color:#00fff7; }
-.equipment-card img { max-width:100%; border-radius:12px; margin-bottom:1rem; }
-.equipment-card button { margin-top:10px; padding:0.5rem 1rem; border:none; background:#39ff14; color:#111; font-weight:700; border-radius:12px; cursor:pointer; }
-.equipment-card button:hover { background:#ff00d4; }
+    /* Reviews */
+    .review { background: #111; padding: 1em; border-radius: 12px; margin-bottom: 1em; }
+    .review .name { font-weight: bold; color: cyan; }
+    .review .stars { color: gold; }
 
-/* Hours Table */
-table { width:100%; border-collapse:collapse; margin-bottom:3rem; background:#111; border-radius:12px; overflow:hidden; box-shadow:0 0 25px #39ff14; }
-thead { background:#ff00d4; color:#111; }
-th, td { padding:1rem 1.5rem; text-align:center; border-bottom:1px solid #222; }
-tbody tr:hover { background:#1a1a1a; box-shadow: inset 0 0 20px #00fff7; }
-
-/* Contact Form */
-.contact-section { background:#111; padding:2rem; border-radius:12px; box-shadow:0 0 40px #ff00d4, inset 0 0 50px #00fff7; max-width:600px; margin:2rem auto; }
-.contact-section h1 { color:#00fff7; text-align:center; margin-bottom:1rem; }
-.contact-form input, .contact-form textarea { width:100%; padding:0.75rem; margin-bottom:1.5rem; border-radius:12px; border:1.5px solid #39ff14; background:#111; color:#39ff14; }
-.contact-form button { width:100%; padding:1rem; background:#39ff14; color:#111; font-weight:700; border:none; border-radius:50px; cursor:pointer; }
-.contact-form button:hover { background:#ff00d4; }
-
-/* Reviews */
-.review { background:#222; border-radius:12px; padding:1rem 1.5rem; margin-bottom:1.3rem; box-shadow:0 0 15px #39ff14; transition:0.3s; }
-.review:hover { box-shadow:0 0 30px #00fff7; }
-.review .name { font-weight:700; color:#ff00d4; }
-.review .stars { color:#ffdc00; }
-.review .text { color:#a6f3e6; }
-
-/* Particles Background */
-#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
-
-/* Cart Modal */
-#cartModal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; justify-content:center; align-items:center; z-index:10000; }
-#cartContent { background:#111; padding:2rem; border-radius:12px; width:90%; max-width:500px; max-height:80%; overflow-y:auto; box-shadow:0 0 40px #ff00d4, inset 0 0 50px #00fff7; position:relative; }
-#cartContent h2 { text-align:center; color:#00fff7; margin-bottom:1rem; }
-#cartContent .closeCart { position:absolute; top:10px; right:10px; background:#ff00d4; border:none; color:#111; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; }
-#cartContent .closeCart:hover { background:#39ff14; }
-.cart-item { display:flex; justify-content:space-between; margin-bottom:1rem; color:#eee; }
-.cart-item span { margin-left:5px; }
-#cartBtn { position:fixed; bottom:80px; right:20px; padding:10px 20px; background:#00fff7; border:none; border-radius:10px; color:#111; cursor:pointer; z-index:1000; }
-
-/* Responsive */
-@media(max-width:600px){ .features, .equipment-list{ grid-template-columns:1fr; } nav ul{ flex-direction:column; gap:1rem; } }
-</style>
+    /* Canvas background */
+    #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+  </style>
 </head>
 <body>
+  <!-- Splash Screen -->
+  <div id="splash">Welcome to FitLife Gym Store</div>
 
-<!-- Splash -->
-<div id="splash"><h1>FitLife Gym Store</h1></div>
+  <!-- Canvas Background -->
+  <canvas id="particles"></canvas>
 
-<!-- Particles -->
-<canvas id="particles"></canvas>
+  <!-- Header -->
+  <header>
+    <h1>FitLife</h1>
+    <nav>
+      <ul>
+        <li><a href="#" data-page="home" class="active">Home</a></li>
+        <li><a href="#" data-page="equipment">Equipment</a></li>
+        <li><a href="#" data-page="reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <button id="cartBtn">Cart (0)</button>
+    <button id="musicBtn">Play Music</button>
+  </header>
 
-<!-- Header -->
-<header>
-<nav>
-<ul>
-<li><a href="#" class="active" data-page="home">Home</a></li>
-<li><a href="#" data-page="hours">Opening Hours</a></li>
-<li><a href="#" data-page="contact">Contact Us</a></li>
-<li><a href="#" data-page="reviews">Reviews</a></li>
-</ul>
-</nav>
-</header>
+  <!-- Pages -->
+  <main>
+    <section id="home" class="page">
+      <h2>Welcome to FitLife Gym Store</h2>
+      <p>Your one-stop shop for premium gym equipment.</p>
+    </section>
 
-<!-- Main Pages -->
-<main>
-<section id="home" class="container page">
-<div class="hero">
-<h1>Welcome to FitLife Gym Store</h1>
-<p>Your one-stop shop for the latest gym equipment and gear.</p>
-<button class="btn">Shop Now</button>
-</div>
-<div class="features">
-<div><h2>Quality Equipment</h2><p>We only stock the best brands to help you reach your fitness goals.</p></div>
-<div><h2>Expert Support</h2><p>Our team is here to help you find exactly what you need.</p></div>
-<div><h2>Fast Shipping</h2><p>Get your gear quickly and start your workout without delay.</p></div>
-</div>
+    <section id="equipment" class="page">
+      <h2>Equipment</h2>
+      <div class="equipment-grid">
+        <div class="equipment-card" data-name="Dumbbells" data-price="50">
+          <img src="https://via.placeholder.com/150" alt="Dumbbells">
+          <h3>Dumbbells</h3>
+          <p>$50</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="equipment-card" data-name="Treadmill" data-price="600">
+          <img src="https://via.placeholder.com/150" alt="Treadmill">
+          <h3>Treadmill</h3>
+          <p>$600</p>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+    </section>
 
-<div class="equipment-list">
-<!-- Existing + New items -->
-<div class="equipment-card" data-name="Treadmill" data-price="1200"><img src="https://www.southsidefitness.com.au/wp-content/uploads/2019/08/t101.png" alt="Treadmill"><h3>Treadmill</h3><p>Top-tier cardio machine to keep you moving.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Dumbbells" data-price="80"><img src="https://samsfitness.com.au/wp-content/uploads/2020/09/CGHEXDB40KG-rubber-hex-dumbbell-pair.jpg" alt="Dumbbells"><h3>Dumbbells</h3><p>Perfect weights for strength training at any level.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Yoga Mat" data-price="40"><img src="https://contents.mediadecathlon.com/p2940263/k$a5497573eda45c1fa216dc2723cbb610/beginner-yoga-mat-180-cm-x-58-cm-x-5-mm-dark-blue-domyos-8928284.jpg" alt="Yoga Mat"><h3>Yoga Mat</h3><p>Comfortable and durable mat for all your yoga sessions.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Kettlebell" data-price="50"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIByvQ8YfqNkyEhmFnmNbuH3ip3z3e3wtfOQ&s"><h3>Kettlebell</h3><p>Perfect for full-body strength workouts.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Resistance Bands" data-price="25"><img src="https://www.thysol.com.au/wp-content/uploads/2020/04/resistance-band-with-handles-blue-heavy-resistance.png" alt="Resistance Bands"><h3>Resistance Bands</h3><p>Versatile bands for stretching and strength training.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Pull-Up Bar" data-price="60"><img src="https://www.ncfitnessgear.com.au/wp-content/uploads/2020/04/CHIN-BAR-scaled.jpg" alt="Pull-Up Bar"><h3>Pull-Up Bar</h3><p>Install at home for upper body workouts.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Exercise Ball" data-price="35"><img src="https://www.yourpathtohealth.com.au/wp-content/uploads/2022/02/istockphoto-459504359-612x612-1.jpg" alt="Exercise Ball"><h3>Exercise Ball</h3><p>Improve core strength and balance.</p><button>Add to Cart</button></div>
-<div class="equipment-card" data-name="Jump Rope" data-price="15"><img src="https://yorkfitness.com.au/wp-content/uploads/2024/01/81003-product-2.png" alt="Jump Rope"><h3>Jump Rope</h3><p>Cardio made simple and fun.</p><button>Add to Cart</button></div>
-</div>
-</section>
+    <section id="reviews" class="page">
+      <h2>Customer Reviews</h2>
+      <div id="reviews"></div>
+    </section>
+  </main>
 
-<section id="hours" class="container page">
-<h2>Opening Hours</h2>
-<table>
-<thead><tr><th>Day</th><th>Open</th><th>Close</th></tr></thead>
-<tbody>
-<tr><td>Monday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-<tr><td>Tuesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-<tr><td>Wednesday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-<tr><td>Thursday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-<tr><td>Friday</td><td>6:00 AM</td><td>10:00 PM</td></tr>
-<tr><td>Saturday</td><td>8:00 AM</td><td>8:00 PM</td></tr>
-<tr><td>Sunday</td><td>8:00 AM</td><td>6:00 PM</td></tr>
-</tbody>
-</table>
-</section>
+  <!-- Cart Modal -->
+  <div id="cartModal">
+    <div id="cartModalContent">
+      <span class="closeCart" style="cursor:pointer; float:right;">&times;</span>
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <p id="cartTotal">Total: $0</p>
+      <button id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
 
-<section id="contact" class="container page">
-<div class="contact-section">
-<h1>Contact Us</h1>
-<ul class="contact-info">
-<li><strong>Phone:</strong> (123) 456-7890</li>
-<li><strong>Email:</strong> support@fitlifegymstore.com</li>
-<li><strong>Address:</strong> 123 Fitness Ave, Wellness City, USA</li>
-</ul>
-<form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you!'); this.reset();">
-<label>Name</label><input type="text" required>
-<label>Email</label><input type="email" required>
-<label>Message</label><textarea rows="5" required></textarea>
-<button type="submit">Send Message</button>
-</form>
-</div>
-</section>
+  <!-- Background Music -->
+  <audio id="bgmusic" loop>
+    <source src="your-music-file.mp3" type="audio/mpeg">
+  </audio>
 
-<section id="reviews" class="container page">
-<h2>Customer Reviews</h2>
-</section>
+  <script>
+    // Splash
+    window.addEventListener('load', () => { 
+      document.querySelectorAll('.container')[0].style.display='block'; 
 
-<!-- Music Controls -->
-<audio id="bgmusic" loop>
-<source src="your-music-file.mp3" type="audio/mpeg">
-</audio>
-<button id="musicBtn" style="position:fixed;bottom:20px;right:20px;padding:10px 20px;background:#00fff7;border:none;border-radius:10px;color:#111;cursor:pointer;">Play Music</button>
-
-<!-- Cart Button & Modal -->
-<button id="cartBtn">Cart (0)</button>
-<div id="cartModal">
-<div id="cartContent">
-<h2>Your Cart</h2>
-<button class="closeCart">X</button>
-<div id="cartItems"></div>
-<div id="cartTotal" style="margin-top:1rem;font-weight:bold;color:#39ff14;">Total: $0</div>
-<button id="checkoutBtn" style="margin-top:10px;padding:0.8rem 1.5rem;background:#00fff7;color:#111;border:none;border-radius:12px;cursor:pointer;">Checkout</button>
-</div>
-</div>
-
-<script>
-// Splash
-window.addEventListener('load', () => { 
-  document.querySelectorAll('.container')[0].style.display='block'; 
-
-  // Auto-play music after splash
-  setTimeout(() => {
-    bgMusic.play().then(() => {
-      musicBtn.textContent = 'Pause Music';
-    }).catch(err => {
-      console.log("Autoplay blocked:", err);
-      musicBtn.textContent = 'Play Music';
+      // Auto-play music once splash ends
+      setTimeout(() => {
+        bgMusic.play().then(() => {
+          musicBtn.textContent = 'Pause Music';
+        }).catch(err => {
+          console.log("Autoplay blocked:", err);
+          musicBtn.textContent = 'Play Music';
+        });
+      }, 2200);
     });
-  }, 2200);
-});
 
-// Navigation
-const navLinks = document.querySelectorAll('nav ul li a');
-const pages = document.querySelectorAll('.page');
-navLinks.forEach(link=>{
-  link.addEventListener('click', e=>{
-    e.preventDefault();
-    const pageName = link.dataset.page;
-    navLinks.forEach(l=>l.classList.remove('active'));
-    link.classList.add('active');
-    pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
-  });
-});
+    // Navigation
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const pages = document.querySelectorAll('.page');
+    navLinks.forEach(link=>{
+      link.addEventListener('click', e=>{
+        e.preventDefault();
+        const pageName = link.dataset.page;
+        navLinks.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+        pages.forEach(p=>{ p.style.display=p.id===pageName?'block':'none'; });
+      });
+    });
 
-// Music
-const musicBtn = document.getElementById('musicBtn');
+    // Music
+    const musicBtn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgmusic');
+    bgMusic.volume = 0.5;
+
+    musicBtn.addEventListener('click',()=>{ 
+      if(bgMusic.paused){ 
+        bgMusic.play().then(() => {
+          musicBtn.textContent='Pause Music';
+        }).catch(err => {
+          console.log("Playback blocked:", err);
+          alert("Click again to enable music 🎶");
+        });
+      } else { 
+        bgMusic.pause(); 
+        musicBtn.textContent='Play Music'; 
+      } 
+    });
+
+    // Particles
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w=canvas.width=window.innerWidth;
+    let h=canvas.height=window.innerHeight;
+    window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
+    const particlesArray=[];
+    for(let i=0;i<120;i++){ particlesArray.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2+1, dx:(Math.random()-0.5)*1.5, dy:(Math.random()-0.5)*1.5}); }
+    function animateParticles(){ ctx.clearRect(0,0,w,h); particlesArray.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(0,255,255,0.7)'; ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>w)p.dx*=-1; if(p.y<0||p.y>h)p.dy*=-1; }); requestAnimationFrame(animateParticles); }
+    animateParticles();
+
+    // Shopping Cart & Reviews
+    let cart=[];
+    const cartBtn=document.getElementById('cartBtn');
+    const cartModal=document.getElementById('cartModal');
+    const closeCart=document.querySelector('.closeCart');
+    const cartItems=document.getElementById('cartItems');
+    const cartTotal=document.getElementById('cartTotal');
+    const checkoutBtn=document.getElementById('checkoutBtn');
+
+    document.querySelectorAll('.equipment-card button').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const card=e.target.closest('.equipment-card');
+        const item={name:card.dataset.name, price:Number(card.dataset.price), qty:1};
+        const exist=cart.find(i=>i.name===item.name);
+        if(exist){ exist.qty+=1; } else{ cart.push(item); }
+        updateCart();
+      });
+    });
+
+    function updateCart(){
+      cartItems.innerHTML='';
+      let total=0;
+      cart.forEach(i=>{
+        const div=document.createElement('div');
+        div.className='cart-item';
+        div.innerHTML=`${i.name} x ${i.qty} <span>$${i.price*i.qty}</span>`;
+        cartItems.appendChild(div);
+        total+=i.price*i.qty;
+      });
+      cartTotal.textContent=`Total: $${total}`;
+      cartBtn.textContent=`Cart (${cart.reduce((a,b)=>a+b.qty,0)})`;
+    }
+
+    cartBtn.addEventListener('click',()=>{ cartModal.style.display='flex'; });
+    closeCart.addEventListener('click',()=>{ cartModal.style.display='none'; });
+    checkoutBtn.addEventListener('click',()=>{
+      if(cart.length>0){ alert('Thanks for your purchase!'); cart=[]; updateCart(); cartModal.style.display='none'; } else{ alert('Cart is empty!'); }
+    });
+
+    // Reviews Data
+    const reviewsData=[
+      {name: "Jaxx Huffman", text: "The best gym store I’ve ever been to. Five stars!"},
+      {name: "Hayley Orozco", text: "Love the variety and fast shipping."},
+      {name: "Devon Grant", text: "Quality equipment at good prices. Highly recommend."}
+    ];
+    const reviewsContainer=document.getElementById('reviews');
+    reviewsData.forEach(({name,text})=>{
+      const reviewEl=document.createElement('div');
+      reviewEl.className='review';
+      reviewEl.innerHTML=`<div class="name">${name}</div><div class="stars" aria-label="5 star rating">★★★★★</div><div class="text">${text}</div>`;
+      reviewsContainer.appendChild(reviewEl);
+    });
+  </script>
+</body>
+</html>
